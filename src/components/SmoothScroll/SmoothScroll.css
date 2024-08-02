@@ -1,0 +1,16 @@
+.SmoothScrollBar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.SmoothScrollBar a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+#info {
+    height: 500px;
+    padding: '50px';
+    background-color: #e0e0e0;
+}

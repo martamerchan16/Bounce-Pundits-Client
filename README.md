@@ -21,7 +21,7 @@ vew Rev
 _Components_:
 Navigation.
 Footer.
-ClubCard. = Alex
+ClubCard.
 ReviewCard.
 FormClub.
 EditClubForm.
@@ -33,9 +33,9 @@ CreateReviewForm.
 
 _Pages_:
 AboutUsPage.
-HomePage. = Robert
+HomePage. 
 ClubsPage.
-ClubDetailsPage. = Marta
+ClubDetailsPage.
 EditClubPage.
 EditReviewPage.
 CreateClubPage
