@@ -1,9 +1,12 @@
+import Navigation from "../../components/Navigation/Navigation"
+
+
 function HomePage() {
 
     return (
-        <div>
-            <h1>Hola chicas!!!!</h1>
-        </div>
+
+        <Navigation />
+
     )
 
 }
