@@ -13,21 +13,6 @@ const SmoothScroll = () => {
                 <AnchorLink href="#reviews">Reviews</AnchorLink>
             </div>
 
-            <section id="info">
-                <h2>Information</h2>
-
-                <p>Este es el contenido de la sección Cosas 1.</p>
-            </section>
-
-            <section id="howToGet" style={{ padding: '50px', backgroundColor: '#e0e0e0' }}>
-                <h2>Map</h2>
-                <p>Este es el contenido de la sección Cosas 2.</p>
-            </section>
-
-            <section id="reviews" style={{ padding: '50px', backgroundColor: '#e0e0e0' }}>
-                <h2>Map</h2>
-                <p>Este es el contenido de la sección Cosas 2.</p>
-            </section>
         </div>
     );
 };

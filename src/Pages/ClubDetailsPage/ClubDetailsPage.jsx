@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import './ClubDetailsPage.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import ClubImgCarousel from '../../components/ClubImgCarousel/ClubImgCarousel'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row, Button } from 'react-bootstrap'
 import SmoothScroll from '../../components/SmoothScroll/SmoothScroll'
 
 const ClubDetailsPage = () => {
@@ -35,16 +35,42 @@ const ClubDetailsPage = () => {
                 ? <h1>cargando.....</h1>
                 : <div className='ClubDetailsPage'>
 
-                    <Container>
-                        <Row>
-                            <Col>
-                                <ClubImgCarousel />
-                                <SmoothScroll />
-                            </Col>
-                        </Row>
-                    </Container>
+
+                    <Row>
+                        <Col>
+                            <ClubImgCarousel />
+                            <SmoothScroll />
+
+                            <section id="info">
+                                <Row>
+                                    <Col>
+                                        <h2>{club.name}</h2>
+                                        <p> {club.town}, {club.city} - {club.address}, {club.zipCode}</p>
+
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic minima quibusdam sequi sunt consequatur natus cupiditate, iste velit quasi voluptate? Perferendis ratione eveniet, eos id minus enim iste vero magni.</p>
+                                    </Col>
+
+                                    <Col>
+                                        <Link to={`/clubs/edit/${id}`} ><Button variant='dark'>✏️</Button></Link>
+
+                                    </Col>
+                                </Row>
 
 
+                            </section>
+
+                            <section id="howToGet">
+                                <h2>Map</h2>
+                                <p>Este es el contenido de la sección Cosas 2.</p>
+                                <Button variant='dark'>📍</Button>
+                            </section>
+
+                            <section id="reviews" >
+                                <h2>Map</h2>
+                                <p>Este es el contenido de la sección Cosas 2.</p>
+                            </section>
+                        </Col>
+                    </Row>
 
                 </div>
             }
