@@ -1,9 +1,17 @@
+import "./Footer.css"
+
 function Footer() {
 
     return (
-        <div>
-            <h2>footer!!!!</h2>
-        </div>
+
+        <footer className="footer bg-dark text-white mt-auto py-3">
+
+            <div className="text-center">
+                <p>© 2024 Bounce Pundits. All rights reserved.</p>
+            </div>
+
+        </footer>
+
     )
 }
 

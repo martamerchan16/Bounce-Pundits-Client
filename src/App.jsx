@@ -11,12 +11,16 @@ import EditClubPage from './Pages/EditClubPage/EditClubPage'
 import EditReviewPage from './Pages/EditReviewPage/EditReviewPage'
 import ClubDetailsPage from './Pages/ClubDetailsPage/ClubDetailsPage'
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
+import Navigation from './components/Navigation/Navigation';
+import Footer from './components/Footer_/Footer';
 
 function App() {
 
   return (
 
     <div className='App'>
+
+      <Navigation />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutUsPage />} />
@@ -28,6 +32,7 @@ function App() {
         <Route path='/clubs/:id/review/edit/:id' element={<EditReviewPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </div>
   )
 }

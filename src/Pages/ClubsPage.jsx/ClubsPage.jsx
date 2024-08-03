@@ -36,7 +36,7 @@ const ClubPage = () => {
         < div className="ClubsPage" >
 
             {isLoading ?
-                <h1>Cargando...</h1>
+                <h1>Cargando!!!...</h1>
                 : clubs.map(eachClub => {
 
                     return (
