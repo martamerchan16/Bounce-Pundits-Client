@@ -1,7 +1,13 @@
+import CreateReviewForm from "../../components/CreateReviewForm/CreateReviewForm"
+
 const createReviewPage = () => {
 
 return(
-    <p>Aqui esta createReviewPage</p>
+
+    <div>
+        <CreateReviewForm/>
+    </div>
+
 )
 
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #info {
     height: 500px;
     padding: '50px';
@@ -15,4 +16,45 @@
     padding: '50px';
     background-color: #e0e0e0;
 
+=======
+#info {
+    height: 500px;
+    padding: '50px';
+    background-color: #e0e0e0;
+    position: 'relative'
+}
+
+#howToGet {
+    height: 500px;
+    padding: '50px';
+    background-color: #e0e0e0;
+}
+
+#reviews {
+    height: 500px;
+    padding: '50px';
+    background-color: #e0e0e0;
+}
+
+.review {
+    width: 80%;
+    background-color: rgb(60, 58, 58);
+    color: white;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.editbtn {
+    position: absolute;
+    right: 10px;
+}
+
+.imgUserReview {
+    width: 50px;
+}
+
+img {
+    width: 100%;
+>>>>>>> ab3fc09f49b6530fb5b8952bf5b6ba7ebd968203
 }
