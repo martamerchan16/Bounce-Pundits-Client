@@ -55,8 +55,8 @@ const EditClubForm = () => {
             address,
             zipCode,
             contact: { web: "", email: "", phone: "" },
-            pictures,
-            services
+            pictures: [],
+            services: []
         }
 
         axios
@@ -64,7 +64,6 @@ const EditClubForm = () => {
             .then(res => navigate(`/clubs/${id}`))
             .catch(err => {
                 console.log(err)
-                alert('errrrorrrrr')
             })
     }
 
@@ -76,8 +75,8 @@ const EditClubForm = () => {
     const handleServiceChange = (service) => {
         setClubData(prevState => {
             const services = prevState.services.includes(service)
-                ? prevState.services.filter(s => s !== service) // Eliminar servicio si ya está
-                : [...prevState.services, service]; // Añadir servicio si no está
+                ? prevState.services.filter(s => s !== service) //TODO: PREGUNTAR A GERMAN CUAL SERIA LA MEJOR FORMA DE HACER ESTO, PORQUE LO VI EN INTERNET PERO NO ESTOY MUY SEGURA
+                : [...prevState.services, service]
 
             return { ...prevState, services };
         })
@@ -210,7 +209,7 @@ const EditClubForm = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="imagesField">
-                        <Form.Label>Images</Form.Label>
+                        <Form.Label>Images</Form.Label>{/* TODO: CUAL SERA LA MEJOR FORMA DE HACER QUE SE PUEDAN SUBIR IMAGENES */}
                         <Form.Control type="file" />
                     </Form.Group>
 
@@ -269,7 +268,7 @@ const EditClubForm = () => {
 export default EditClubForm
 
 
-// creo que seria mejor convertir facilities en un array para poder implementar la logica de services,de momento lo dejo aqui comentado porque no se como hacerlo
+// TODO: creo que seria mejor convertir facilities en un array para poder implementar la logica de services,de momento lo dejo aqui comentado porque no se como hacerlo
 // < Form.Group className = "mb-3" controlId = "faicilitiesField" >
 //                 <Form.Label>Facilities:</Form.Label>
 //                 <hr />
