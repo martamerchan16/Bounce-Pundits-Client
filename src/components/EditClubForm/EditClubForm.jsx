@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-
 const EditClubForm = () => {
     const API_URL = 'http://localhost:5005'
 
@@ -21,13 +20,14 @@ const EditClubForm = () => {
         town: '',
         address: '',
         zipCode: '',
-        contact: {
-            web: "",
-            email: "",
-            phone: ''
-        },
         pictures: '',
         services: ["wifi", "restaurant", "parking", "lookerRoom", "showers", "petFriendly", "swimmingPool", "shop"]
+    })
+
+    const [contactData, setContactData] = useState({
+        web: "",
+        email: "",
+        phone: ''
     })
 
     useEffect(() => {
@@ -39,6 +39,7 @@ const EditClubForm = () => {
             .get(`${API_URL}/clubs/${id}`)
             .then((response) => {
                 setClubData(response.data)
+                setContactData(response.data.contact)
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
@@ -46,7 +47,8 @@ const EditClubForm = () => {
 
     const handleClubSubmit = event => {
         event.preventDefault()
-        const { name, city, town, address, zipCode, contact, pictures, services } = clubData
+        const { name, city, town, address, zipCode, pictures, services } = clubData
+        const { web, phone, email } = contactData
 
         const requestBody = {
             name,
@@ -54,9 +56,9 @@ const EditClubForm = () => {
             town,
             address,
             zipCode,
-            contact: { web: "", email: "", phone: "" },
+            contact: contactData,
             pictures: [],
-            services: []
+            services: [],
         }
 
         axios
@@ -70,6 +72,11 @@ const EditClubForm = () => {
     const handleInputChange = e => {
         const { value, name } = e.target
         setClubData({ ...clubData, [name]: value })
+    }
+
+    const handleContactChange = e => {
+        const { value, name } = e.target
+        setContactData({ ...contactData, [name]: value })
     }
 
     const handleServiceChange = (service) => {
@@ -210,7 +217,7 @@ const EditClubForm = () => {
 
                     <Form.Group className="mb-3" controlId="imagesField">
                         <Form.Label>Images</Form.Label>{/* TODO: CUAL SERA LA MEJOR FORMA DE HACER QUE SE PUEDAN SUBIR IMAGENES */}
-                        <Form.Control type="file" />
+                        <Form.Control type="url" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="emailField">
@@ -225,9 +232,9 @@ const EditClubForm = () => {
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type="email"
-                                    value={clubData.contact.email}
+                                    value={contactData.email}
                                     placeholder="Enter email"
-                                    onChange={handleInputChange}
+                                    onChange={handleContactChange}
                                     name="email" />
                             </Form.Group>
                         </Col>
@@ -237,8 +244,9 @@ const EditClubForm = () => {
                                 <Form.Label>Phone</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    value={contactData.phone}
                                     placeholder="Enter phone"
-                                    onChange={handleInputChange}
+                                    onChange={handleContactChange}
                                     name="phone"
                                 />
                             </Form.Group>
@@ -250,7 +258,8 @@ const EditClubForm = () => {
                         <Form.Control
                             type="url"
                             placeholder="Enter Url"
-                            onChange={handleInputChange}
+                            value={contactData.web}
+                            onChange={handleContactChange}
                             name="web" />
                     </Form.Group>
 

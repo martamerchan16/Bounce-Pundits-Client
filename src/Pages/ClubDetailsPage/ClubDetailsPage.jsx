@@ -43,10 +43,10 @@ const ClubDetailsPage = () => {
             .catch(err => console.log(err))
     }
 
-    const deleteProject = () => {
+    const deleteReview = reviewId => {
         axios
-            .delete(`${API_URL}/clubs/${id}/reviews/${id}`) //TODO: No me funciona lo de eliminar revisar el lunes
-            .then(res => navigate(`/clubs/${id}`))
+            .delete(`${API_URL}/reviews/${reviewId}`) //TODO: No me funciona lo de eliminar revisar el lunes
+            .then(res => fetchReviews())
             .catch((error) => console.log(error))
     }
 
@@ -99,36 +99,37 @@ const ClubDetailsPage = () => {
                     <section id="reviews" >
                         <h2>Reviews/Reseñas:</h2>
                         <Link to={`/clubs/${id}/review/create`}><Button variant='dark'>💬</Button></Link>
-                        {reviews.map(eachReview => {
+                        {
+                            reviews.map(eachReview => {
 
-                            return (
-                                <div key={eachReview.id} className="review">
-                                    <Row  >
-                                        <Col md={{ span: 1 }} className="d-flex justify-content-center align-items-start pt-2">
-                                            <Image className='imgUserReview' roundedCircle={true} src="https://res.cloudinary.com/dshhkzxwr/image/upload/v1722773773/divertida-caricatura-de-aguacate-pegatina_u0nhfh.jpg" />
-                                        </Col>
-                                        <Col className="d-flex flex-column justify-content-start">
-                                            <Row>
-                                                <Col>
-                                                    <h6> {eachReview.user} | {eachReview.date}</h6>
-                                                    <p>rating with starts</p>
-                                                </Col>
-                                                <Col className="d-flex flex-row justify-content-end">
-                                                    <DropdownButton variant="outline-dark" id="dropdown-basic-button" title="...">
-                                                        <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
-                                                        <Dropdown.Item href="#/action-2" onClick={deleteProject}>Delete</Dropdown.Item>
-                                                    </DropdownButton>
+                                return (
+                                    <div key={eachReview.id} className="review">
+                                        <Row  >
+                                            <Col xs={{ span: 3 }} md={{ span: 2 }} lg={{ span: 1 }} className="d-flex justify-content-center align-items-start pt-2">
+                                                <Image className='imgUserReview' roundedCircle={true} src="https://res.cloudinary.com/dshhkzxwr/image/upload/v1722773773/divertida-caricatura-de-aguacate-pegatina_u0nhfh.jpg" />
+                                            </Col>
+                                            <Col className="d-flex flex-column justify-content-start">
+                                                <Row>
+                                                    <Col>
+                                                        <h6> {eachReview.user} | {eachReview.date}</h6>
+                                                        <p>rating with starts</p>
+                                                    </Col>
+                                                    <Col className="d-flex flex-row justify-content-end">
+                                                        <DropdownButton variant="outline-dark" id="dropdown-basic-button" title="...">
+                                                            <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
+                                                            <Dropdown.Item href="#/action-2" onClick={() => deleteReview(eachReview.id)}>Delete</Dropdown.Item>
+                                                        </DropdownButton>
 
-                                                </Col>
-                                            </Row>
-                                            <p>{eachReview.comment}</p>
+                                                    </Col>
+                                                </Row>
+                                                <p>{eachReview.comment}</p>
 
-                                        </Col>
-                                    </Row>
-                                </div>
-                            )
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                )
 
-                        })
+                            })
                         }
 
                     </section>
