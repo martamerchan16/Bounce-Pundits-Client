@@ -7,7 +7,7 @@ function Navigation() {
 
         <Navbar key={false} expand={false} className="bg-body-tertiary mb-3" fixed='top'>
             <Container fluid>
-                {/* <Navbar.Brand to="/" as={Link}>Buonce Pundits</Navbar.Brand> */}
+                <Navbar.Brand to="/clubs/:id/review/create" as={Link}>Review</Navbar.Brand>
                 <Navbar.Brand></Navbar.Brand>
                 <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
                 <Navbar.Offcanvas

@@ -2,14 +2,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import AppRoutes from './routes/AppRoutes';
-
+import Navigation from './components/Navigation/Navigation'
+import Footer from './components/Footer_/Footer'
 
 function App() {
 
   return (
 
     <div className='App'>
+      <Navigation />
       <AppRoutes />
+      <Footer />
     </div>
   )
 }
