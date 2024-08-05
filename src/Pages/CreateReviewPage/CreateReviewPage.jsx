@@ -1,11 +1,11 @@
-import CreateReviewForm from "../../components/CreateReviewForm/CreateReviewForm"
+// import CreateReviewForm from "../../components/CreateReviewForm/CreateReviewForm"
 
 const createReviewPage = () => {
 
 return(
 
     <div>
-        <CreateReviewForm/>
+        {/* <CreateReviewForm/> */}
     </div>
 
 )
