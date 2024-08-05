@@ -1,14 +1,14 @@
-import CreateReviewForm from "../../components/CreateReviewForm/CreateReviewForm"
-
+// import CreateReviewForm from "../../components/CreateReviewForm/CreateReviewForm"
+//TODO: DESCOMENTAR ANTES DE HACER MERGE
 const createReviewPage = () => {
 
-return(
+    return (
 
-    <div>
-        <CreateReviewForm/>
-    </div>
+        <div>
+            {/* <CreateReviewForm/> */}
+        </div>
 
-)
+    )
 
 }
 export default createReviewPage

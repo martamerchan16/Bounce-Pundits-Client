@@ -1,5 +1,5 @@
 .ClubImgCarousel img {
     height: 500px;
-    object-fit: cover
-        /** TODO: NO CONSIGO QUE LAS IMAGENES ocupen el mismo alto**/
+    object-fit: cover;
+    /** TODO: NO CONSIGO QUE LAS IMAGENES ocupen el mismo alto**/
 }
