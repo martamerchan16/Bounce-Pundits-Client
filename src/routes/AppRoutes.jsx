@@ -11,7 +11,7 @@ import NotFoundPage from './../Pages/NotFoundPage/NotFoundPage'
 
 const AppRoutes = () => {
     return (
-        <div className="AppRoutes">
+        <div className="AppRoutes mt-5">
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/about' element={<AboutUsPage />} />

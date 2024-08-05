@@ -30,17 +30,22 @@ const ClubPage = () => {
 
     }
 
+    //     style = {{ padding: '20px 300px' }
+    // }
+
     return (
         < div className="ClubsPage" >
 
             <h1 className="text-center" style={{ fontWeight: 'bold' }}>Bounce Pundits Clubs</h1>
-
-            <p className="text-center" style={{ padding: '20px 300px' }}>
-                En Bounce Pundits, accede a clubs con instalaciones de primer nivel y entrenadores expertos.
-                Disfruta la variedad de pistas de alta calidad.
-                Mejora tus habilidades en una comunidad apasionada y profesional.
-            </p>
-
+            <Row>
+                <Col>
+                    <p className="text-center" xs={{ span: 1 }} md={{ span: 2 }} lg={{ span: 3 }} style={{}} >
+                        En Bounce Pundits, accede a clubs con instalaciones de primer nivel y entrenadores expertos.
+                        Disfruta la variedad de pistas de alta calidad.
+                        Mejora tus habilidades en una comunidad apasionada y profesional.
+                    </p>
+                </Col>
+            </Row>
             <Link to={'/clubs/create'}>
                 <Button variant="outline-dark" style={{ padding: '10px 10px' }}>Añadir Club</Button>
             </Link>

@@ -5,7 +5,7 @@ function Navigation() {
 
     return (
 
-        <Navbar key={false} expand={false} className="bg-body-tertiary mb-3" fixed='top'>
+        <Navbar key={false} expand={false} className="bg-body-tertiary" fixed='top'>
             <Container fluid>
                 <Navbar.Brand to="/clubs/:id/review/create" as={Link}>Review</Navbar.Brand>
                 <Navbar.Brand></Navbar.Brand>
