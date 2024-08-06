@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Button, CloseButton, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { SERVICES } from "../../Consts/FieldsClub";
 
 const API_URL = "http://localhost:5005";
 
@@ -12,7 +13,8 @@ const CreateClubForm = () => {
         town: '',
         address: '',
         zipCode: '',
-        services: ['']
+        services: [],
+        pictures: []
     });
 
     const [contactData, setContactData] = useState({
@@ -32,6 +34,7 @@ const CreateClubForm = () => {
             }
         ]
     )
+
 
     const navigate = useNavigate();
 
@@ -66,21 +69,10 @@ const CreateClubForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const { name, city, town, address, zipCode, pictures, services } = clubData
-        const { web, phone, email } = contactData
-        const { sport, price, indoor, outdoor } = facilitiesData
-        handleCheckboxChange()
-
 
         const requestBody = {
-            name,
-            city,
-            town,
-            address,
-            zipCode,
+            ...clubData,
             contact: contactData,
-            pictures: [],
-            services: [],
             facilities: facilitiesData
         }
 
@@ -95,11 +87,20 @@ const CreateClubForm = () => {
         setFacilitiesData(newFacilities)
     }
 
+    const deleteSport = sportIdToDelete => {
+        const facilitiesCopy = [...facilitiesData]
+        facilitiesCopy.splice(sportIdToDelete, 1)
+        setFacilitiesData(facilitiesCopy)
+    }
+
+
+
+
     return (
         <div className="CreateClubForm">
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="nameField">
-                    <Form.Label>Nombre del Club</Form.Label>
+                    <Form.Label >Nombre del Club</Form.Label>
                     <Form.Control
                         type="text"
                         value={clubData.name}
@@ -159,16 +160,16 @@ const CreateClubForm = () => {
                 <Form.Group className="mb-3" controlId="servicesField">
                     <Form.Label>Services</Form.Label>
                     <Row>
-                        {["wifi", "restaurant", "parking", "lookerRoom", "showers", "petFriendly", "swimmingPool", "shop"].map(service => (
+                        {SERVICES.map(eachService => (
                             <Col md={{ span: 6 }}>
 
                                 <Form.Check
-                                    key={service}
+                                    key={eachService.name}
                                     type="checkbox"
-                                    label={service.charAt(0).toUpperCase() + service.slice(1)}
-                                    checked={clubData.services.includes(service)}
+                                    label={eachService.label.charAt(0).toUpperCase() + eachService.label.slice(1)}
+                                    checked={clubData.services.includes(eachService.name)}
                                     onChange={handleCheckboxChange}
-                                    name={service} />
+                                    name={eachService.name} />
                             </Col>
 
                         ))}
@@ -180,57 +181,75 @@ const CreateClubForm = () => {
 
                                 return (
 
-                                    <div className="mt-3 mb-3 facilityFields" style={{ background: 'green', padding: 50 }}>
-                                        <CloseButton></CloseButton>
-                                        <Form.Label>Deporte  {idx + 1}</Form.Label>
-                                        <Form.Select onChange={e => handleFacilityChange(e, idx)} value={facilitiesData[idx].sport} name="sport" aria-label="Default select example">
-                                            <option>Selecciona</option>
-                                            <option value="tennis">Tenis</option>
-                                            <option value="paddle">Padel</option>
-                                            <option value="pingpong">Pingpong</option>
-                                            <option value="squash">Squash</option>
-                                            <option value="badminton">Badminton</option>
-                                            <option value="racketball">Racketball</option>
-                                            <option value="pickletball">Pickleball</option>
-                                            <option value="fronton">Fronton</option>
-                                        </Form.Select>
+                                    <div className="mt-3 mb-3 facilityFields" style={{ background: 'grey', padding: 50 }}>
+                                        <Row>
+                                            <Col md={{ span: 12, offset: 0 }} className="text-end">
+                                                <CloseButton onClick={() => deleteSport(idx)} />
+                                            </Col>
+                                            <Col>
+                                                <Form.Label>Deporte  {idx + 1}</Form.Label>
+                                                <Form.Select onChange={e => handleFacilityChange(e, idx)} value={facilitiesData[idx].sport} name="sport" aria-label="Default select example">
+                                                    <option>Selecciona</option>
+                                                    <option value="tennis">Tenis</option>
+                                                    <option value="paddle">Padel</option>
+                                                    <option value="pingpong">Pingpong</option>
+                                                    <option value="squash">Squash</option>
+                                                    <option value="badminton">Badminton</option>
+                                                    <option value="racketball">Racketball</option>
+                                                    <option value="pickletball">Pickleball</option>
+                                                    <option value="fronton">Fronton</option>
+                                                </Form.Select>
+                                            </Col>
 
-                                        <Form.Label>Precio/hora</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={facilitiesData[idx].price}
-                                            placeholder="Escribe aqui el precio"
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            name="price" />
+                                            <Col md={{ span: 6 }}>
+                                                <Form.Label>Precio/hora</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={facilitiesData[idx].price}
+                                                    placeholder="Escribe aqui el precio"
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    name="price" />
+                                            </Col>
+                                            <Col md={{ span: 6 }}>
+                                                <Form.Label>Nº Pistas Indoor</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={facilitiesData[idx].indoor}
+                                                    placeholder="Escribe aqui nº pistas indoor disponibles"
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    name="indoor" />
+                                            </Col>
 
-                                        <Form.Label>Nº Pistas Indoor</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={facilitiesData[idx].indoor}
-                                            placeholder="Escribe aqui nº pistas indoor disponibles"
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            name="indoor" />
+                                            <Col md={{ span: 6 }}>
+                                                <Form.Label>Nº Pistas Outdoor</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={facilitiesData[idx].outdoor}
+                                                    placeholder="Escribe aqui nº pistas outdoor disponibles"
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    name="outdoor" />
+                                            </Col>
 
-                                        <Form.Label>Nº Pistas Outdoor</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={facilitiesData[idx].outdoor}
-                                            placeholder="Escribe aqui nº pistas outdoor disponibles"
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            name="outdoor" />
-
-
+                                        </Row>
                                     </div>
                                 )
                             })
                         }
                         <Button variant="dark" onClick={addNewSport}>Añadir Deporte</Button>
                     </FormGroup>
+
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="imagesField">
                     <Form.Label>Images</Form.Label>
-                    <Form.Control type="url" />
+                    <Form.Control
+                        type="url"
+                        value={clubData.pictures}
+                        placeholder="Introduce aqui la URL de tu imagen"
+                        onChange={handleInputChange}
+                        name="pictures"
+                    />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="contactField">
                     <Form.Label>Contact:</Form.Label>
                 </Form.Group>
