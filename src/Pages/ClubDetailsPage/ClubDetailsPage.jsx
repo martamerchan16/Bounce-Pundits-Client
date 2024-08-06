@@ -6,6 +6,7 @@ import ClubImgCarousel from '../../components/ClubImgCarousel/ClubImgCarousel'
 import { Col, Container, Row, Button, Image, DropdownButton, Dropdown } from 'react-bootstrap'
 import SmoothScroll from '../../components/SmoothScroll/SmoothScroll'
 import Spinner from '../../components/Spinners/Spinner'
+import { SERVICES, FACILITIES } from '../../consts/club-const'
 
 const ClubDetailsPage = () => {
 
@@ -45,7 +46,7 @@ const ClubDetailsPage = () => {
 
     const deleteReview = reviewId => {
         axios
-            .delete(`${API_URL}/reviews/${reviewId}`) //TODO: No me funciona lo de eliminar revisar el lunes
+            .delete(`${API_URL}/reviews/${reviewId}`)
             .then(res => fetchReviews())
             .catch((error) => console.log(error))
     }
@@ -67,17 +68,22 @@ const ClubDetailsPage = () => {
                         <Row>
                             <Col>
                                 <h3>Servicios:</h3>
+
                                 <ul>
-                                    {club.services.map(e => <li>{e}</li>)}
+                                    {
+                                        SERVICES
+                                            .filter(eachService => club.services.includes(eachService.name))
+                                            .map(elm => <li>{elm.label}</li>)
+                                    }
+
                                 </ul>
                             </Col>
                             <Col>
                                 <h3>Deportes disponibles:</h3>
                                 <ul>
-                                    <li>Tennis: 5€/h</li>
-                                    <li>Paddle: 5€/h</li>
-                                    <li>Ping Pong: 5€/h</li>
-                                    <li>Fronton: 5€/h</li>
+                                    {
+                                        club.facilities.map(elm => <li>{elm.name}</li>)
+                                    }
                                 </ul>
                             </Col>
                         </Row>
