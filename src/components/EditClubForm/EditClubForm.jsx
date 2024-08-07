@@ -23,7 +23,7 @@ const EditClubForm = () => {
         address: '',
         zipCode: '',
         pictures: [],
-        services: ["wifi", "restaurant", "parking", "lookerRoom", "showers", "petFriendly", "swimmingPool", "shop"]
+        services: []
     })
 
     const [contactData, setContactData] = useState({
@@ -36,7 +36,7 @@ const EditClubForm = () => {
     const [facilitiesData, setFacilitiesData] = useState(
         [
             {
-                sport: '',
+                name: '',
                 price: '',
                 indoor: '',
                 outdoor: ''
@@ -104,7 +104,7 @@ const EditClubForm = () => {
     }
 
     const addNewSport = () => {
-        const newFacilities = [...facilitiesData, { sport: '', price: '', indoor: '', outdoor: '' }]
+        const newFacilities = [...facilitiesData, { name: '', price: '', indoor: '', outdoor: '' }]
         setFacilitiesData(newFacilities)
     }
 
@@ -113,9 +113,9 @@ const EditClubForm = () => {
         const { name } = event.target
 
         setClubData(prevState => {
-            const services = prevState.services.includes(name)
-                ? prevState.services.filter(s => s !== name)
-                : [...prevState.services, name]
+            const services = prevState.services.some(eachStateService => eachStateService.name == name)
+                ? prevState.services.filter(s => s.name !== name)
+                : [...prevState.services, { name: name }]
 
             return { ...prevState, services };
         })
@@ -198,10 +198,10 @@ const EditClubForm = () => {
                                     return (
                                         <Col md={{ span: 6 }}>
                                             <Form.Check
-                                                key={eachService.key}
+                                                key={eachService.name}
                                                 type="checkbox"
-                                                label={eachService.label}
-                                                checked={clubData.services.includes(eachService.name)}
+                                                label={eachService.name}
+                                                checked={clubData.services.some(eachStatusService => eachStatusService.name === eachService.name)}
                                                 onChange={handleServiceChange}
                                                 name={eachService.name} />
                                         </Col>
@@ -223,13 +223,13 @@ const EditClubForm = () => {
                                         <Form.Label>Deporte {idx + 1}</Form.Label>
                                         <Form.Select
                                             onChange={e => handleFacilityChange(e, idx)}
-                                            value={facilitiesData[idx].sport}
-                                            name="sport"
+                                            value={facilitiesData[idx].name}
+                                            name="name"
                                             aria-label="select sport">
                                             <option>Selecciona deporte</option>
 
                                             {
-                                                FACILITIES.map(eachFacility => <option key={eachFacility.key} value={eachFacility.value}>{eachFacility.name}</option>)
+                                                FACILITIES.map(eachFacility => <option key={eachFacility.name} value={eachFacility.name}>{eachFacility.name}</option>)
                                             }
 
                                         </Form.Select>

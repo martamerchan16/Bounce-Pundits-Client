@@ -9,7 +9,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { SERVICES } from "../../Consts/FieldsClub";
+import { SERVICES, FACILITIES } from "../../consts/club-const";
 
 const API_URL = "http://localhost:5005";
 
@@ -32,7 +32,7 @@ const CreateClubForm = () => {
 
   const [facilitiesData, setFacilitiesData] = useState([
     {
-      sport: "",
+      name: "",
       price: "",
       indoor: "",
       outdoor: "",
@@ -42,11 +42,13 @@ const CreateClubForm = () => {
   const navigate = useNavigate();
 
   const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
+
+    const { name, checked } = e.target
+
     setClubData((prevState) => {
       const services = checked
-        ? [...prevState.services, name]
-        : prevState.services.filter((service) => service != name);
+        ? [...prevState.services, { name: name }]
+        : prevState.services.filter((service) => service.name != name);
       return { ...prevState, services };
     });
   };
@@ -76,7 +78,7 @@ const CreateClubForm = () => {
       ...clubData,
       contact: contactData,
       facilities: facilitiesData,
-    };
+    }
 
     axios
       .post(`${API_URL}/clubs`, requestBody)
@@ -87,10 +89,10 @@ const CreateClubForm = () => {
   const addNewSport = () => {
     const newFacilities = [
       ...facilitiesData,
-      { sport: "", price: "", indoor: "", outdoor: "" },
+      { name: "", price: "", indoor: "", outdoor: "" },
     ];
     setFacilitiesData(newFacilities);
-  };
+  }
 
   const deleteSport = (sportIdToDelete) => {
     const facilitiesCopy = [...facilitiesData];
@@ -167,89 +169,83 @@ const CreateClubForm = () => {
         <Form.Group className="mb-3" controlId="servicesField">
           <Form.Label>Services</Form.Label>
           <Row>
-            {SERVICES.map((eachService) => (
-              <Col md={{ span: 6 }}>
-                <Form.Check
-                  key={eachService.name}
-                  type="checkbox"
-                  label={
-                    eachService.label.charAt(0).toUpperCase() +
-                    eachService.label.slice(1)
-                  }
-                  checked={clubData.services.includes(eachService.name)}
-                  onChange={handleCheckboxChange}
-                  name={eachService.name}
-                />
-              </Col>
-            ))}
+            {
+              SERVICES.map((eachService) => (
+                <Col md={{ span: 6 }}>
+                  <Form.Check
+                    key={eachService.name}
+                    type="checkbox"
+                    label={eachService.name}
+                    checked={clubData.services.some(eachStatusService => eachStatusService.name === eachService.name)}
+                    onChange={handleCheckboxChange}
+                    name={eachService.name}
+                  />
+                </Col>
+              ))}
           </Row>
           <FormGroup>
             <Form.Label>Deportes disponibles</Form.Label>
-            {facilitiesData.map((eachFacility, idx) => {
-              return (
-                <div
-                  className="mt-3 mb-3 facilityFields"
-                  style={{ background: "grey", padding: 50 }}
-                >
-                  <Row>
-                    <Col md={{ span: 12, offset: 0 }} className="text-end">
-                      <CloseButton onClick={() => deleteSport(idx)} />
-                    </Col>
-                    <Col>
-                      <Form.Label>Deporte {idx + 1}</Form.Label>
-                      <Form.Select
-                        onChange={(e) => handleFacilityChange(e, idx)}
-                        value={facilitiesData[idx].sport}
-                        name="sport"
-                        aria-label="Default select example"
-                      >
-                        <option>Selecciona</option>
-                        <option value="tennis">Tenis</option>
-                        <option value="paddle">Padel</option>
-                        <option value="pingpong">Pingpong</option>
-                        <option value="squash">Squash</option>
-                        <option value="badminton">Badminton</option>
-                        <option value="racketball">Racketball</option>
-                        <option value="pickletball">Pickleball</option>
-                        <option value="fronton">Fronton</option>
-                      </Form.Select>
-                    </Col>
+            {
+              facilitiesData.map((eachFacility, idx) => {
+                return (
+                  <div
+                    className="mt-3 mb-3 facilityFields"
+                    style={{ background: "grey", padding: 50 }}
+                  >
+                    <Row>
+                      <Col md={{ span: 12, offset: 0 }} className="text-end">
+                        <CloseButton onClick={() => deleteSport(idx)} />
+                      </Col>
+                      <Col>
+                        <Form.Label>Deporte {idx + 1}</Form.Label>
+                        <Form.Select
+                          onChange={(e) => handleFacilityChange(e, idx)}
+                          value={facilitiesData[idx].name}
+                          name="name"
+                          aria-label="Default select example"
+                        >
+                          <option>Selecciona</option>
+                          {
+                            FACILITIES.map(elm => <option value={elm.name} key={elm.name}>{elm.name}</option>)
+                          }
+                        </Form.Select>
+                      </Col>
 
-                    <Col md={{ span: 6 }}>
-                      <Form.Label>Precio/hora</Form.Label>
-                      <Form.Control
-                        type="number"
-                        value={facilitiesData[idx].price}
-                        placeholder="Escribe aqui el precio"
-                        onChange={(e) => handleFacilityChange(e, idx)}
-                        name="price"
-                      />
-                    </Col>
-                    <Col md={{ span: 6 }}>
-                      <Form.Label>Nº Pistas Indoor</Form.Label>
-                      <Form.Control
-                        type="number"
-                        value={facilitiesData[idx].indoor}
-                        placeholder="Escribe aqui nº pistas indoor disponibles"
-                        onChange={(e) => handleFacilityChange(e, idx)}
-                        name="indoor"
-                      />
-                    </Col>
+                      <Col md={{ span: 6 }}>
+                        <Form.Label>Precio/hora</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={facilitiesData[idx].price}
+                          placeholder="Escribe aqui el precio"
+                          onChange={(e) => handleFacilityChange(e, idx)}
+                          name="price"
+                        />
+                      </Col>
+                      <Col md={{ span: 6 }}>
+                        <Form.Label>Nº Pistas Indoor</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={facilitiesData[idx].indoor}
+                          placeholder="Escribe aqui nº pistas indoor disponibles"
+                          onChange={(e) => handleFacilityChange(e, idx)}
+                          name="indoor"
+                        />
+                      </Col>
 
-                    <Col md={{ span: 6 }}>
-                      <Form.Label>Nº Pistas Outdoor</Form.Label>
-                      <Form.Control
-                        type="number"
-                        value={facilitiesData[idx].outdoor}
-                        placeholder="Escribe aqui nº pistas outdoor disponibles"
-                        onChange={(e) => handleFacilityChange(e, idx)}
-                        name="outdoor"
-                      />
-                    </Col>
-                  </Row>
-                </div>
-              );
-            })}
+                      <Col md={{ span: 6 }}>
+                        <Form.Label>Nº Pistas Outdoor</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={facilitiesData[idx].outdoor}
+                          placeholder="Escribe aqui nº pistas outdoor disponibles"
+                          onChange={(e) => handleFacilityChange(e, idx)}
+                          name="outdoor"
+                        />
+                      </Col>
+                    </Row>
+                  </div>
+                );
+              })}
             <Button variant="dark" onClick={addNewSport}>
               Añadir Deporte
             </Button>

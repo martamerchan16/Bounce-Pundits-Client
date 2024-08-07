@@ -1,69 +1,53 @@
 export const SERVICES = [
     {
-        label: 'Tienda',
-        name: 'shop'
+        name: 'Tienda'
     },
     {
-        label: 'Wifi',
-        name: 'wifi'
+        name: 'Wifi'
     },
     {
-        label: 'Piscina',
-        name: 'swimmingPool'
+        name: 'Piscina'
     },
     {
-        label: 'Vestuarios',
-        name: 'lookerRooms'
+        name: 'Vestuarios'
     },
     {
-        label: 'Duchas',
-        name: 'showers'
+        name: 'Duchas'
     },
     {
-        label: 'Aparcamiento',
-        name: 'parking'
+        name: 'Aparcamiento'
     },
     {
-        label: 'Admite mascotas',
-        name: 'petFriendly'
+        name: 'Admite mascotas'
     },
     {
-        label: 'Restaurante',
-        name: 'restaurant'
+        name: 'Restaurante'
     },
 ]
 
 export const FACILITIES = [
     {
-        value: 'tennis',
         name: 'Tenis'
     },
     {
-        value: 'paddle',
         name: 'Padel'
     },
     {
-        value: 'pingpong',
         name: 'Pingpong'
     },
     {
-        value: 'squash',
         name: 'Squash'
     },
     {
-        value: 'badminton',
         name: 'Badminton'
     },
     {
-        value: 'racketball',
         name: 'Racketball'
     },
     {
-        value: 'pickleball',
         name: 'Pickleball'
     },
     {
-        value: 'fronton',
         name: 'Fronton'
     },
 

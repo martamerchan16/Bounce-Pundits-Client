@@ -6,7 +6,6 @@ import ClubImgCarousel from '../../components/ClubImgCarousel/ClubImgCarousel'
 import { Col, Container, Row, Button, Image, DropdownButton, Dropdown } from 'react-bootstrap'
 import SmoothScroll from '../../components/SmoothScroll/SmoothScroll'
 import Spinner from '../../components/Spinners/Spinner'
-import { SERVICES, FACILITIES } from '../../consts/club-const'
 
 const ClubDetailsPage = () => {
 
@@ -71,9 +70,7 @@ const ClubDetailsPage = () => {
 
                                 <ul>
                                     {
-                                        SERVICES
-                                            .filter(eachService => club.services.includes(eachService.name))
-                                            .map(elm => <li>{elm.label}</li>)
+                                        club.services.map(elm => <li>{elm.name}</li>)
                                     }
 
                                 </ul>
