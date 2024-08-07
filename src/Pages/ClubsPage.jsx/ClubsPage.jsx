@@ -1,7 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import ClubCard from "../../components/ClubCard/ClubCard"
-import { Button, Col, Container, Row } from "react-bootstrap"
+import { Button, Col, Container, Row, } from "react-bootstrap"
+import Image from "react-bootstrap/Image"
 import Spinner from "../../components/Spinners/Spinner"
 import { Link } from "react-router-dom"
 
@@ -30,19 +31,18 @@ const ClubPage = () => {
 
     }
 
-    //     style = {{ padding: '20px 300px' }
-    // }
 
     return (
         < div className="ClubsPage" >
-
             <h1 className="text-center" style={{ fontWeight: 'bold' }}>Bounce Pundits Clubs</h1>
             <Row>
-                <Col>
-                    <p className="text-center" xs={{ span: 1 }} md={{ span: 2 }} lg={{ span: 3 }} style={{}} >
+                <Col className="text-center" >
+                    <p >
+
                         En Bounce Pundits, accede a clubs con instalaciones de primer nivel y entrenadores expertos.
                         Disfruta la variedad de pistas de alta calidad.
                         Mejora tus habilidades en una comunidad apasionada y profesional.
+
                     </p>
                 </Col>
             </Row>
