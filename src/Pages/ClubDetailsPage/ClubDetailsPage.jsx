@@ -3,9 +3,11 @@ import './ClubDetailsPage.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import ClubImgCarousel from '../../components/ClubImgCarousel/ClubImgCarousel'
-import { Col, Container, Row, Button, Image, DropdownButton, Dropdown } from 'react-bootstrap'
+import { Col, Container, Row, Button, Image, DropdownButton, Dropdown, Modal } from 'react-bootstrap'
 import SmoothScroll from '../../components/SmoothScroll/SmoothScroll'
 import Spinner from '../../components/Spinners/Spinner'
+import ClubMap from '../../components/ClubMap/ClubMap'
+import EditClubForm from '../../components/EditClubForm/EditClubForm'
 
 const ClubDetailsPage = () => {
 
@@ -18,6 +20,8 @@ const ClubDetailsPage = () => {
     const [club, setClub] = useState()
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         fetchClub()
@@ -62,7 +66,6 @@ const ClubDetailsPage = () => {
                     <section id="info">
 
                         <h2>{club.name}</h2>
-                        <p> {club.town}, {club.city} - {club.address}, {club.zipCode}</p>
                         <hr />
                         <Row>
                             <Col>
@@ -89,14 +92,26 @@ const ClubDetailsPage = () => {
                         <a href='https://www.padelsporthome.com/'><p>🌐{club.contact.web}</p></a>
                         <p>📞{club.contact.phone}</p>
                         <p>📧{club.contact.email}</p>
-                        <Link to={`/clubs/edit/${id}`} className='editbtn'><Button variant='dark'>✏️</Button></Link>
+                        <Button className='editbtn' variant='dark' onClick={() => setShowModal(true)}>Editar club</Button>
+
+                        <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Editar club</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <EditClubForm setShowModal={setShowModal} />
+                            </Modal.Body>
+                        </Modal>
+
 
                     </section>
 
                     <section id="howToGet">
-                        <h2>map</h2>
-                        <p>Este es el contenido de la sección Cosas 2.</p>
-                        <Button variant='dark'>📍</Button>
+                        <div className="clubMap">
+                            <ClubMap location={club.location} />
+                            <p> <strong>{club.address}, {club.zipCode},{club.town}, {club.city}</strong></p>
+                        </div>
+
                     </section>
 
                     <section id="reviews" >

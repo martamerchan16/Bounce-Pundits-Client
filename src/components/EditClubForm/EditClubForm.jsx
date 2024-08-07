@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from './../Spinners/Spinner'
 import { SERVICES, FACILITIES } from '../../consts/club-const';
 
-const EditClubForm = () => {
+const EditClubForm = ({ setShowModal }) => {
     const API_URL = 'http://localhost:5005'
 
     const { id } = useParams()
@@ -72,7 +72,11 @@ const EditClubForm = () => {
 
         axios
             .put(`${API_URL}/clubs/${id}`, requestBody)
-            .then(res => navigate(`/clubs/${id}`))
+            .then(res => {
+                navigate(`/clubs/${id}`)
+                setShowModal(false)
+            })
+
             .catch(err => {
                 console.log(err)
             })
@@ -107,6 +111,13 @@ const EditClubForm = () => {
         const newFacilities = [...facilitiesData, { name: '', price: '', indoor: '', outdoor: '' }]
         setFacilitiesData(newFacilities)
     }
+
+    const deleteSport = (sportIdToDelete) => {
+        const facilitiesCopy = [...facilitiesData];
+        facilitiesCopy.splice(sportIdToDelete, 1);
+        setFacilitiesData(facilitiesCopy);
+    }
+
 
     const handleServiceChange = (event) => {
 
@@ -219,7 +230,7 @@ const EditClubForm = () => {
                                 return (
 
                                     <div className="mt-3 mb-3 facilityFields" style={{ background: 'grey', padding: 30 }}>
-                                        <CloseButton></CloseButton>
+                                        <CloseButton onClick={() => deleteSport(idx)} />
                                         <Form.Label>Deporte {idx + 1}</Form.Label>
                                         <Form.Select
                                             onChange={e => handleFacilityChange(e, idx)}
@@ -264,7 +275,7 @@ const EditClubForm = () => {
                         <Button variant="dark" onClick={addNewSport}>Añadir Deporte</Button>
                     </Form.Group>
 
-                    <Form.Label>Imagenes club</Form.Label>
+                    <Form.Label className="mt-3" >Imagenes club</Form.Label>
                     <InputGroup className="mb-3" controlId="imagesField">
 
                         <Form.Control
@@ -276,17 +287,18 @@ const EditClubForm = () => {
                             Delete
                         </Button>
                     </InputGroup>
+
                     <Button variant="dark">Añadir imagen</Button>
 
                     <Form.Group className="mb-3" controlId="emailField">
-                        <Form.Label>Contact:</Form.Label>
+                        <Form.Label className="mt-3">Contact:</Form.Label>
                     </Form.Group>
 
                     <hr />
 
                     <Row>
                         <Col>
-                            <Form.Group className="mb-3" controlId="emailField">
+                            <Form.Group controlId="emailField">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type="email"

@@ -1,19 +1,19 @@
 #info {
-    height: 500px;
-    padding: '50px';
+    height: 100%;
+    padding: 50px;
     background-color: #e0e0e0;
     position: 'relative'
 }
 
 #howToGet {
-    height: 500px;
-    padding: '50px';
+    height: 100%;
+    padding: 50px;
     background-color: #e0e0e0;
 }
 
 #reviews {
-    height: 500px;
-    padding: '50px';
+    height: 100%;
+    padding: 50px;
     background-color: #e0e0e0;
 }
 
@@ -27,8 +27,9 @@
 }
 
 .editbtn {
-    position: absolute;
-    right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
 }
 
 .imgUserReview {
@@ -37,4 +38,8 @@
 
 img {
     width: 100%;
+}
+
+.clubMap {
+    padding: 5px;
 }

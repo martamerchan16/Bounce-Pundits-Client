@@ -8,9 +8,9 @@ const SmoothScroll = () => {
         <div className='SmoothScroll'>
 
             <div className="SmoothScrollBar">
-                <AnchorLink href="#info">Information</AnchorLink>
-                <AnchorLink href="#howToGet">How to get</AnchorLink>
-                <AnchorLink href="#reviews">Reviews</AnchorLink>
+                <AnchorLink href="#info">Informacion detallada</AnchorLink>
+                <AnchorLink href="#howToGet">Como llegar</AnchorLink>
+                <AnchorLink href="#reviews">Reseñas</AnchorLink>
             </div>
 
         </div>
