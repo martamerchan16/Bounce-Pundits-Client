@@ -1,18 +1,18 @@
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
 const CreateReviewForm = () => {
-  const { id } = useParams();
+  
 
   const [reviewData, setReviewData] = useState({
     user: "",
     comment: "",
     rating: 0,
     date: "",
+    clubId: ""
   });
 
   const handlerInputChange = (e) => {
@@ -24,12 +24,11 @@ const CreateReviewForm = () => {
     e.preventDefault();
 
     const requestBody = {
-      user: "",
-      comment: "",
+      ...reviewData,
     };
 
     axios
-      .post(`${API_URL}/clubs/${id}`, requestBody)
+      .post(`${API_URL}/reviews`, requestBody)
       .then((res) => navigate("/clubs"))
       .catch((err) => console.log(err));
   };
