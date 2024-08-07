@@ -1,9 +1,19 @@
+import EditReviewForm from "../../components/EditReviewForm/EditReviewForm"
+import { Container, Row, Col } from "react-bootstrap";
+
 const EditReviewPage = () => {
     return (
-        <div className="EditReviewPage">
-            <h1>soy tu EditReviewPage</h1>
-        </div>
+        <Container>
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <h1>Editar reseña</h1>
+          <hr />
+          <EditReviewForm/>
+        </Col>
+      </Row>
+    </Container>
     )
 }
+
 
 export default EditReviewPage
