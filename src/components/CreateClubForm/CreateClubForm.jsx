@@ -6,10 +6,11 @@ import {
   Col,
   Form,
   FormGroup,
+  InputGroup,
   Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { SERVICES, FACILITIES } from "../../consts/club-const";
+import { SERVICES, FACILITIES } from "../../Consts/club-const";
 
 const API_URL = "http://localhost:5005";
 
@@ -36,8 +37,14 @@ const CreateClubForm = () => {
       price: "",
       indoor: "",
       outdoor: "",
+
     },
   ]);
+
+  const [locationData, setLocationData] = useState({
+    latitude: "",
+    longitude: ""
+  })
 
   const navigate = useNavigate();
 
@@ -57,6 +64,11 @@ const CreateClubForm = () => {
     const { name, value } = e.target;
     setClubData({ ...clubData, [name]: value });
   };
+
+  const handleLocationChange = (e) => {
+    const { name, value } = e.target;
+    setLocationData({ ...locationData, [name]: value })
+  }
 
   const handleContactChange = (e) => {
     const { name, value } = e.target;
@@ -78,6 +90,7 @@ const CreateClubForm = () => {
       ...clubData,
       contact: contactData,
       facilities: facilitiesData,
+      location: locationData,
     }
 
     axios
@@ -94,17 +107,39 @@ const CreateClubForm = () => {
     setFacilitiesData(newFacilities);
   }
 
+  const addNewPicture = () => {
+    const picturesCopy = [...clubData.pictures]
+    picturesCopy.push('')
+
+    setClubData({ ...clubData, pictures: picturesCopy })
+  }
+
+  const handlePictureChange = (event, currentIndex) => {
+    const { value } = event.target;
+
+    const picturesCopy = [...clubData.pictures]
+    picturesCopy[currentIndex] = value
+    setClubData({ ...clubData, pictures: picturesCopy });
+  };
+
   const deleteSport = (sportIdToDelete) => {
     const facilitiesCopy = [...facilitiesData];
     facilitiesCopy.splice(sportIdToDelete, 1);
     setFacilitiesData(facilitiesCopy);
   };
 
+  const deletePicture = (pictureIdToDelete) => {
+    const pictureCopy = [...clubData.pictures];
+    pictureCopy.splice(pictureIdToDelete, 1);
+
+    setClubData({ ...clubData, pictures: pictureCopy })
+  }
+
   return (
     <div className="CreateClubForm">
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="nameField">
-          <Form.Label>Nombre del Club</Form.Label>
+          <Form.Label style={{ fontWeight: 'bold' }}>Nombre del Club</Form.Label>
           <Form.Control
             type="text"
             value={clubData.name}
@@ -113,6 +148,9 @@ const CreateClubForm = () => {
             name="name"
           />
         </Form.Group>
+        <div>
+          <Form.Label style={{ fontWeight: 'bold' }} className="mb-2">Direccion</Form.Label>
+        </div>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="cityField">
@@ -167,11 +205,13 @@ const CreateClubForm = () => {
         </Row>
 
         <Form.Group className="mb-3" controlId="servicesField">
-          <Form.Label>Services</Form.Label>
+
+          <Form.Label style={{ fontWeight: 'bold' }}>Servicios</Form.Label>
           <Row>
             {
-              SERVICES.map((eachService) => (
-                <Col md={{ span: 6 }}>
+              SERVICES.map((eachService, idx) => (
+
+                <Col md={{ span: 6 }} key={idx}>
                   <Form.Check
                     key={eachService.name}
                     type="checkbox"
@@ -181,16 +221,20 @@ const CreateClubForm = () => {
                     name={eachService.name}
                   />
                 </Col>
+
               ))}
           </Row>
           <FormGroup>
-            <Form.Label>Deportes disponibles</Form.Label>
+            <Col>
+              <Form.Label style={{ fontWeight: 'bold' }} className="mt-4 mb-2">Deportes disponibles</Form.Label>
+            </Col>
             {
               facilitiesData.map((eachFacility, idx) => {
                 return (
                   <div
                     className="mt-3 mb-3 facilityFields"
-                    style={{ background: "grey", padding: 50 }}
+                    style={{ background: "#e8e8e8", padding: 50 }}
+                    key={idx}
                   >
                     <Row>
                       <Col md={{ span: 12, offset: 0 }} className="text-end">
@@ -251,21 +295,39 @@ const CreateClubForm = () => {
             </Button>
           </FormGroup>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="imagesField">
-          <Form.Label>Images</Form.Label>
-          <Form.Control
-            type="url"
-            value={clubData.pictures}
-            placeholder="Introduce aqui la URL de tu imagen"
-            onChange={handleInputChange}
-            name="pictures"
-          />
-        </Form.Group>
+        {
+          clubData.pictures.map((echPicture, idx) => {
+            return (
+              <div key={idx}>
+                <Form.Group className="mb-3" controlId="imagesField">
+                  <Form.Label>Imagen {idx + 1}</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type="url"
+                      value={clubData.pictures[idx]}
+                      placeholder="Introduce aqui la URL de tu imagen"
+                      onChange={e => handlePictureChange(e, idx)}
+                      name="pictures"
+                    />
+                    <Button variant="outline-danger" onClick={() => deletePicture(idx)}>
+                      Delete
+                    </Button>
+                  </InputGroup>
+                </Form.Group>
+              </div>
+            )
+          })
+        }
+        <div className="d-grid gap-2 m-5">
+          <Button variant="dark" onClick={addNewPicture}>
+            Añadir imagen
+          </Button>
+        </div>
+        <hr />
 
         <Form.Group className="mb-3" controlId="contactField">
-          <Form.Label>Contact:</Form.Label>
+          <Form.Label style={{ fontWeight: 'bold' }}>Informacion de contacto:</Form.Label>
         </Form.Group>
-        <hr />
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="emailField">
@@ -302,6 +364,33 @@ const CreateClubForm = () => {
             name="web"
           />
         </Form.Group>
+
+        <Form.Label>Ubicacion</Form.Label>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="latitudeField">
+              <Form.Control
+                type="text"
+                value={locationData.latitude}
+                placeholder="Escribe aqui el numero de latitud"
+                onChange={handleLocationChange}
+                name="latitude"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3" controlId="longitudeField">
+              <Form.Control
+                type="text"
+                value={locationData.longitude}
+                placeholder="Escribe aqui el numero de longitud"
+                onChange={handleLocationChange}
+                name="longitude"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <hr />
         <div className="d-grid gap-2 m-5">
           <Button type="submit" variant="dark">
             Submit
