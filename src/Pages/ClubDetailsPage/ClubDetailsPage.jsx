@@ -2,12 +2,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import './ClubDetailsPage.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import ClubImgCarousel from '../../components/ClubImgCarousel/ClubImgCarousel'
-import { Col, Container, Row, Button, Image, DropdownButton, Dropdown, Modal } from 'react-bootstrap'
-import SmoothScroll from '../../components/SmoothScroll/SmoothScroll'
-import Spinner from '../../components/Spinners/Spinner'
-import ClubMap from '../../components/ClubMap/ClubMap'
-import EditClubForm from '../../components/EditClubForm/EditClubForm'
+import ClubImgCarousel from './../../components/ClubImgCarousel/ClubImgCarousel'
+import { Col, Container, Row, Button, Image, DropdownButton, Dropdown, Modal, Tabs, Tab } from 'react-bootstrap'
+import SmoothScroll from './../../components/SmoothScroll/SmoothScroll/'
+import Spinner from './../../components/Spinners/Spinner'
+import ClubMap from './../../components/ClubMap/ClubMap'
+import CreateReviewForm from './../../components/CreateReviewForm/CreateReviewForm'
+import EditReviewForm from './../../components/EditReviewForm/EditReviewForm'
+import EditClubForm from './../../components/EditClubForm/EditClubForm'
 
 const ClubDetailsPage = () => {
 
@@ -22,6 +24,9 @@ const ClubDetailsPage = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const [showModal, setShowModal] = useState(false)
+    const [showReviewModal, setShowReviewModal] = useState(false)
+
+    const [key, setKey] = useState('reviews')
 
     useEffect(() => {
         fetchClub()
@@ -61,7 +66,7 @@ const ClubDetailsPage = () => {
                 : <div className='ClubDetailsPage'>
 
                     <ClubImgCarousel />
-                    <SmoothScroll />
+                    <SmoothScroll data-bs-theme='dark' />
 
                     <section id="info">
 
@@ -73,7 +78,7 @@ const ClubDetailsPage = () => {
 
                                 <ul>
                                     {
-                                        club.services.map(elm => <li>{elm.name}</li>)
+                                        club.services.map(elm => <li key={elm.name}>{elm.name}</li>)
                                     }
 
                                 </ul>
@@ -82,7 +87,7 @@ const ClubDetailsPage = () => {
                                 <h3>Deportes disponibles:</h3>
                                 <ul>
                                     {
-                                        club.facilities.map(elm => <li>{elm.name}</li>)
+                                        club.facilities.map(elm => <li key={elm.name}>{elm.name}</li>)
                                     }
                                 </ul>
                             </Col>
@@ -115,40 +120,68 @@ const ClubDetailsPage = () => {
                     </section>
 
                     <section id="reviews" >
-                        <h2>Reviews/Reseñas:</h2>
-                        <Link to={`/clubs/${id}/review/create`}><Button variant='dark'>💬</Button></Link>
-                        {
-                            reviews.map(eachReview => {
+                        <Tabs
+                            id="controlled-tab-example"
+                            activeKey={key}
+                            onSelect={(k) => setKey(k)}
+                            className="mb-3"
+                            fill='true'
 
-                                return (
-                                    <div key={eachReview.id} className="review">
-                                        <Row  >
-                                            <Col xs={{ span: 3 }} md={{ span: 2 }} lg={{ span: 1 }} className="d-flex justify-content-center align-items-start pt-2">
-                                                <Image className='imgUserReview' roundedCircle={true} src="https://res.cloudinary.com/dshhkzxwr/image/upload/v1722773773/divertida-caricatura-de-aguacate-pegatina_u0nhfh.jpg" />
-                                            </Col>
-                                            <Col className="d-flex flex-column justify-content-start">
-                                                <Row>
-                                                    <Col>
-                                                        <h6> {eachReview.user} | {eachReview.date}</h6>
-                                                        <p>rating with starts</p>
+                        >
+                            <Tab eventKey="reviews" title="Reseñas">
+                                {
+                                    reviews.map(eachReview => {
+
+                                        return (
+                                            <div key={eachReview.id} className="review">
+                                                <Row  >
+                                                    <Col xs={{ span: 3 }} md={{ span: 2 }} lg={{ span: 1 }} className="d-flex justify-content-center align-items-start pt-2">
+                                                        <Image className='imgUserReview' roundedCircle={true} src="https://res.cloudinary.com/dshhkzxwr/image/upload/v1722773773/divertida-caricatura-de-aguacate-pegatina_u0nhfh.jpg" />
                                                     </Col>
-                                                    <Col className="d-flex flex-row justify-content-end">
-                                                        <DropdownButton variant="outline-dark" id="dropdown-basic-button" title="...">
-                                                            <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
-                                                            <Dropdown.Item href="#/action-2" onClick={() => deleteReview(eachReview.id)}>Delete</Dropdown.Item>
-                                                        </DropdownButton>
+                                                    <Col className="d-flex flex-column justify-content-start">
+                                                        <Row>
+                                                            <Col>
+                                                                <h6> {eachReview.user} | {eachReview.date}</h6>
+                                                                <p>RATING: {eachReview.rating}</p>
+                                                            </Col>
+                                                            <Col className="d-flex flex-row justify-content-end">
+
+                                                                <DropdownButton variant="outline-dark" id="dropdown-basic-button" title="...">
+
+                                                                    <Dropdown.Item onClick={() => setShowReviewModal(true)}>Editar reseña</Dropdown.Item>
+
+                                                                    <Modal
+                                                                        size="sm"
+                                                                        show={showReviewModal}
+                                                                        onHide={() => setShowReviewModal(false)}
+                                                                    >
+                                                                        <Modal.Header closeButton>
+                                                                            <Modal.Title>Editar reseña</Modal.Title>
+                                                                        </Modal.Header>
+                                                                        <Modal.Body>
+                                                                            <EditReviewForm setShowReviewModal={setShowReviewModal} reviewId={eachReview.id} fetchReviews={fetchReviews} />
+                                                                        </Modal.Body>
+                                                                    </Modal>
+                                                                    <Dropdown.Item href="#/action-2" onClick={() => deleteReview(eachReview.id)}>Delete</Dropdown.Item>
+                                                                </DropdownButton>
+
+                                                            </Col>
+                                                        </Row>
+                                                        <p>{eachReview.comment}</p>
 
                                                     </Col>
                                                 </Row>
-                                                <p>{eachReview.comment}</p>
+                                            </div>
+                                        )
 
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                )
+                                    })
+                                }
+                            </Tab>
+                            <Tab eventKey="addReview" title="Añadir reseña">
+                                <CreateReviewForm fetchReviews={fetchReviews} clubId={id} setKey={setKey} />
+                            </Tab>
 
-                            })
-                        }
+                        </Tabs>
 
                     </section>
 
