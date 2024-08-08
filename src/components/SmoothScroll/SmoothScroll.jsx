@@ -5,12 +5,12 @@ import './SmoothScroll.css'
 const SmoothScroll = () => {
 
     return (
-        <div className='SmoothScroll'>
+        <div className='SmoothScroll bg-dark' >
 
-            <div className="SmoothScrollBar">
-                <AnchorLink href="#info">Informacion detallada</AnchorLink>
-                <AnchorLink href="#howToGet">Como llegar</AnchorLink>
-                <AnchorLink href="#reviews">Reseñas</AnchorLink>
+            <div className="SmoothScrollBar" >
+                <AnchorLink href="#info" offset={100}>Informacion detallada</AnchorLink>
+                <AnchorLink href="#howToGet" offset={100}>Como llegar</AnchorLink>
+                <AnchorLink href="#reviews" offset={100}>Reseñas</AnchorLink>
             </div>
 
         </div>

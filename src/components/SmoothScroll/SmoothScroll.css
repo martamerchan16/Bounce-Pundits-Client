@@ -1,11 +1,13 @@
 .SmoothScrollBar {
     display: flex;
+    align-items: center;
     justify-content: space-around;
-    background-color: rgb(82, 77, 77);
+    color: white;
+    height: 50px;
 }
 
 .SmoothScrollBar a {
     text-decoration: none;
-    color: black;
+    color: white;
     font-weight: bold;
 }

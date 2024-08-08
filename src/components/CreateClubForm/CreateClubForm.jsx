@@ -10,7 +10,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { SERVICES, FACILITIES } from "../../Consts/club-const";
+import { SERVICES, FACILITIES } from "../../consts/club-const";
 
 const API_URL = "http://localhost:5005";
 

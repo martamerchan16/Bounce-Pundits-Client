@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from './../Spinners/Spinner'
-import { SERVICES, FACILITIES } from '../../Consts/club-const';
+import { SERVICES, FACILITIES } from '../../consts/club-const';
 
 const EditClubForm = ({ setShowModal }) => {
     const API_URL = 'http://localhost:5005'

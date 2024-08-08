@@ -1,0 +1,9 @@
+.listClubs {
+    display: flex;
+    align-items: center;
+}
+
+.listClubs img {
+    width: 35%;
+
+}
