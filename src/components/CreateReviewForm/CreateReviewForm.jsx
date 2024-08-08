@@ -1,11 +1,13 @@
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
-const CreateReviewForm = () => {
+const CreateReviewForm = ({ clubId, fetchReviews, setKey }) => {
+
+  const { id } = useParams()
 
 
   const [reviewData, setReviewData] = useState({
@@ -29,12 +31,16 @@ const CreateReviewForm = () => {
     const newDate = new Date().toDateString() // Get the current date
     const requestBody = {
       ...reviewData,
+      clubId: Number(clubId),
       date: newDate// Assign the current date to the date key
     };
 
     axios
       .post(`${API_URL}/reviews`, requestBody)
-      .then((res) => navigate("/"))
+      .then((res) => {
+        fetchReviews();
+        setKey('reviews')
+      })
       .catch((err) => console.log(err));
   };
 

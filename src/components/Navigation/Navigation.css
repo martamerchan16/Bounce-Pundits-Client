@@ -1,3 +1,10 @@
 .bg-body-tertiary {
     background-color: black;
 }
+
+.logo {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    padding-left: 10px;
+}

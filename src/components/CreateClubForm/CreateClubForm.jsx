@@ -14,7 +14,7 @@ import { SERVICES, FACILITIES } from "../../consts/club-const";
 
 const API_URL = "http://localhost:5005";
 
-const CreateClubForm = () => {
+const CreateClubForm = ({ setShowModal }) => {
   const [clubData, setClubData] = useState({
     name: "",
     city: "",
@@ -95,7 +95,10 @@ const CreateClubForm = () => {
 
     axios
       .post(`${API_URL}/clubs`, requestBody)
-      .then((res) => navigate("/clubs"))
+      .then((res) => {
+        navigate("/clubs")
+        setShowModal(false)
+      })
       .catch((err) => console.log(err));
   };
 
@@ -166,7 +169,7 @@ const CreateClubForm = () => {
           </Col>
           <Col>
             <Form.Group className="mb-3" controlId="townField">
-              <Form.Label>Barrio</Form.Label>
+              <Form.Label>Localidad</Form.Label>
               <Form.Control
                 type="text"
                 value={clubData.town}
@@ -233,7 +236,7 @@ const CreateClubForm = () => {
                 return (
                   <div
                     className="mt-3 mb-3 facilityFields"
-                    style={{ background: "#e8e8e8", padding: 50 }}
+                    style={{ background: "#e8e8e8", padding: 10 }}
                     key={idx}
                   >
                     <Row>
@@ -241,14 +244,14 @@ const CreateClubForm = () => {
                         <CloseButton onClick={() => deleteSport(idx)} />
                       </Col>
                       <Col>
-                        <Form.Label>Deporte {idx + 1}</Form.Label>
+                        <Form.Label>Deporte Nº{idx + 1}</Form.Label>
                         <Form.Select
                           onChange={(e) => handleFacilityChange(e, idx)}
                           value={facilitiesData[idx].name}
                           name="name"
                           aria-label="Default select example"
                         >
-                          <option>Selecciona</option>
+                          <option>Selecciona deporte</option>
                           {
                             FACILITIES.map(elm => <option value={elm.name} key={elm.name}>{elm.name}</option>)
                           }
@@ -295,12 +298,13 @@ const CreateClubForm = () => {
             </Button>
           </FormGroup>
         </Form.Group>
+        <Form.Label style={{ fontWeight: 'bold' }}>Imagen del Club</Form.Label>
         {
           clubData.pictures.map((echPicture, idx) => {
             return (
               <div key={idx}>
                 <Form.Group className="mb-3" controlId="imagesField">
-                  <Form.Label>Imagen {idx + 1}</Form.Label>
+                  <Form.Label>Imagen Nº{idx + 1}</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type="url"
@@ -310,9 +314,10 @@ const CreateClubForm = () => {
                       name="pictures"
                     />
                     <Button variant="outline-danger" onClick={() => deletePicture(idx)}>
-                      Delete
+                      Eliminar
                     </Button>
                   </InputGroup>
+
                 </Form.Group>
               </div>
             )
@@ -331,7 +336,7 @@ const CreateClubForm = () => {
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="emailField">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Correo electronico</Form.Label>
               <Form.Control
                 type="email"
                 value={contactData.email}
@@ -355,7 +360,7 @@ const CreateClubForm = () => {
           </Col>
         </Row>
         <Form.Group className="mb-3" controlId="webField">
-          <Form.Label>Web</Form.Label>
+          <Form.Label>Pagina Web</Form.Label>
           <Form.Control
             type="url"
             value={contactData.web}
@@ -365,7 +370,7 @@ const CreateClubForm = () => {
           />
         </Form.Group>
 
-        <Form.Label>Ubicacion</Form.Label>
+        <Form.Label style={{ fontWeight: 'bold' }}>Ubicacion</Form.Label>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="latitudeField">
@@ -393,7 +398,7 @@ const CreateClubForm = () => {
         <hr />
         <div className="d-grid gap-2 m-5">
           <Button type="submit" variant="dark">
-            Submit
+            Crear Club
           </Button>
         </div>
       </Form>

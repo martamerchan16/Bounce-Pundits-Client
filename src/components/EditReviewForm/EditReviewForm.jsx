@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
-const EditReviewForm = () => {
+const EditReviewForm = ({ setShowReviewModal, reviewId, fetchReviews }) => {
   const [reviewData, setReviewData] = useState({
     user: "",
     clubId: "",
@@ -14,15 +14,16 @@ const EditReviewForm = () => {
     date: "",
   });
 
-  const { id } = useParams(); // Get the review ID from the URL
+  const { id } = useParams()
+
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch the existing review data
     axios
-      .get(`${API_URL}/reviews/${id}`)
+      .get(`${API_URL}/reviews/${reviewId}`)
       .then((response) => {
-        setReviewData(response.data);
+        setReviewData(response.data)
       })
       .catch((error) => console.error("Error fetching review data:", error));
   }, []);
@@ -39,16 +40,20 @@ const EditReviewForm = () => {
     const requestBody = {
       ...reviewData,
       date: updatedDate, // Update the date
-    };
+    }
+
 
     axios
-      .put(`${API_URL}/reviews/${id}`, requestBody)
-      .then(() => navigate("/"))
+      .put(`${API_URL}/reviews/${reviewId}`, requestBody)
+      .then(() => {
+        setShowReviewModal()
+        fetchReviews()
+      })
       .catch((error) => console.error("Error updating review:", error));
   };
 
   return (
-    <div className="EditReviewForm mt-5">
+    <div className="EditReviewForm">
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="userName">
           <Form.Label>Usuario</Form.Label>
@@ -59,8 +64,9 @@ const EditReviewForm = () => {
             name="user"
           />
         </Form.Group>
+        <Form.Label>Comentario</Form.Label>
+        <FloatingLabel controlId="floatingTextarea">
 
-        <FloatingLabel controlId="floatingTextarea" label="Comemtario">
           <Form.Control
             as="textarea"
             placeholder="Leave a comment here"
@@ -82,7 +88,7 @@ const EditReviewForm = () => {
                 type="radio"
                 name="rating"
                 value={star}
-                checked={reviewData.rating === String(star)}
+                checked={Number(reviewData.rating) === star}
                 onChange={handlerInputChange}
               />
             ))}
@@ -90,8 +96,8 @@ const EditReviewForm = () => {
         </Form.Group>
 
         <div className="d-grid">
-          <Button variant="dark" type="submit" className="mt-3">
-            Actualizar reseña
+          <Button variant="dark" type="submit" className="mt-3"  >
+            Guardar Cambios
           </Button>
         </div>
       </Form>

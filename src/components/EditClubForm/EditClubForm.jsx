@@ -44,6 +44,21 @@ const EditClubForm = ({ setShowModal }) => {
         ]
     )
 
+    const [locationData, setLocationData] = useState({
+        latitude: "",
+        longitude: ""
+    })
+
+    const handlePictureChange = (event, currentIndex) => {
+        const { value } = event.target;
+
+        const picturesCopy = [...clubData.pictures]
+        picturesCopy[currentIndex] = value
+        setClubData({ ...clubData, pictures: picturesCopy });
+    };
+
+
+
     useEffect(() => {
         fetchClubsData()
     }, [])
@@ -56,6 +71,7 @@ const EditClubForm = ({ setShowModal }) => {
                 setContactData(response.data.contact)
                 setFacilitiesData(response.data.facilities)
                 setIsLoading(false)
+                setLocationData(response.data.location)
             })
             .catch(err => console.log(err))
     }
@@ -67,7 +83,8 @@ const EditClubForm = ({ setShowModal }) => {
         const requestBody = {
             ...clubData,
             contact: contactData,
-            facilities: facilitiesData
+            facilities: facilitiesData,
+            location: locationData
         }
 
         axios
@@ -99,6 +116,12 @@ const EditClubForm = ({ setShowModal }) => {
         setContactData({ ...contactData, [name]: value })
     }
 
+    const handleLocationChange = (e) => {
+        const { name, value } = e.target;
+        setLocationData({ ...locationData, [name]: value })
+    }
+
+
     const handleFacilityChange = (event, currentIndex) => {
         const { value, name } = event.target
 
@@ -112,10 +135,24 @@ const EditClubForm = ({ setShowModal }) => {
         setFacilitiesData(newFacilities)
     }
 
+    const addNewPicture = () => {
+        const picturesCopy = [...clubData.pictures]
+        picturesCopy.push('')
+
+        setClubData({ ...clubData, pictures: picturesCopy })
+    }
+
     const deleteSport = (sportIdToDelete) => {
         const facilitiesCopy = [...facilitiesData];
         facilitiesCopy.splice(sportIdToDelete, 1);
         setFacilitiesData(facilitiesCopy);
+    }
+
+    const deletePicture = (pictureIdToDelete) => {
+        const pictureCopy = [...clubData.pictures];
+        pictureCopy.splice(pictureIdToDelete, 1);
+
+        setClubData({ ...clubData, pictures: pictureCopy })
     }
 
 
@@ -138,7 +175,7 @@ const EditClubForm = ({ setShowModal }) => {
                 ? <Spinner />
                 : <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="nameField">
-                        <Form.Label>Name Club</Form.Label>
+                        <Form.Label style={{ fontWeight: 'bold' }}>Nombre del Club</Form.Label>
                         <Form.Control
                             type="text"
                             value={clubData.name}
@@ -149,7 +186,7 @@ const EditClubForm = ({ setShowModal }) => {
                     <Row>
                         <Col>
                             <Form.Group className="mb-3" controlId="cityField">
-                                <Form.Label>City</Form.Label>
+                                <Form.Label>Ciudad</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={clubData.city}
@@ -161,7 +198,7 @@ const EditClubForm = ({ setShowModal }) => {
 
                         <Col>
                             <Form.Group className="mb-3" controlId="townField">
-                                <Form.Label>Town</Form.Label>
+                                <Form.Label>Localidad</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={clubData.town}
@@ -175,7 +212,7 @@ const EditClubForm = ({ setShowModal }) => {
                     <Row>
                         <Col>
                             <Form.Group className="mb-3" controlId="addressField">
-                                <Form.Label>Address</Form.Label>
+                                <Form.Label>Calle</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={clubData.address}
@@ -189,7 +226,7 @@ const EditClubForm = ({ setShowModal }) => {
                         <Col>
 
                             <Form.Group className="mb-3" controlId="zipCodeField">
-                                <Form.Label>ZipCode</Form.Label>
+                                <Form.Label>Codigo Postal</Form.Label>
                                 <Form.Control
                                     type="number"
                                     value={clubData.zipCode}
@@ -203,7 +240,7 @@ const EditClubForm = ({ setShowModal }) => {
 
                     <Form.Group className="mb-3" controlId="servicesField">
                         <Row>
-                            <Form.Label>Servicios</Form.Label>
+                            <Form.Label style={{ fontWeight: 'bold' }}>Servicios</Form.Label>
                             {
                                 SERVICES.map((eachService) => {
                                     return (
@@ -223,83 +260,106 @@ const EditClubForm = ({ setShowModal }) => {
                     </Form.Group>
                     <hr />
                     <Form.Group controlId="facilitiesField">
-                        <Form.Label>Deportes disponibles</Form.Label>
+                        <Form.Label style={{ fontWeight: 'bold' }} className="mt-4 mb-2">Deportes disponibles</Form.Label>
                         {
                             facilitiesData.map((eachFacility, idx) => {
 
                                 return (
 
-                                    <div className="mt-3 mb-3 facilityFields" style={{ background: 'grey', padding: 30 }}>
-                                        <CloseButton onClick={() => deleteSport(idx)} />
-                                        <Form.Label>Deporte {idx + 1}</Form.Label>
-                                        <Form.Select
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            value={facilitiesData[idx].name}
-                                            name="name"
-                                            aria-label="select sport">
-                                            <option>Selecciona deporte</option>
+                                    <div className="mt-3 mb-3 facilityFields" style={{ background: "#e8e8e8", padding: 10 }}>
+                                        <Row>
+                                            <Col md={{ span: 12, offset: 0 }} className="text-end">
+                                                <CloseButton onClick={() => deleteSport(idx)} />
+                                            </Col>
+                                            <Col>
+                                                <Form.Label>Deporte Nº{idx + 1}</Form.Label>
+                                                <Form.Select
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    value={facilitiesData[idx].name}
+                                                    name="name"
+                                                    aria-label="select sport">
+                                                    <option>Selecciona deporte</option>
 
-                                            {
-                                                FACILITIES.map(eachFacility => <option key={eachFacility.name} value={eachFacility.name}>{eachFacility.name}</option>)
-                                            }
+                                                    {
+                                                        FACILITIES.map(eachFacility => <option key={eachFacility.name} value={eachFacility.name}>{eachFacility.name}</option>)
+                                                    }
 
-                                        </Form.Select>
-
-                                        <Form.Label>Precio/hora</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={facilitiesData[idx].price}
-                                            placeholder="Escribe aqui el precio"
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            name="price" />
-
-                                        <Form.Label>Nº Pistas Indoor</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={facilitiesData[idx].indoor}
-                                            placeholder="Escribe aqui nº pistas indoor disponibles"
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            name="indoor" />
-
-                                        <Form.Label>Nº Pistas Outdoor</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={facilitiesData[idx].outdoor}
-                                            placeholder="Escribe aqui nº pistas outdoor disponibles"
-                                            onChange={e => handleFacilityChange(e, idx)}
-                                            name="outdoor" />
+                                                </Form.Select>
+                                            </Col>
+                                            <Col md={{ span: 6 }}>
+                                                <Form.Label>Precio/hora</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={facilitiesData[idx].price}
+                                                    placeholder="Escribe aqui el precio"
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    name="price" />
+                                            </Col>
+                                            <Col md={{ span: 6 }}>
+                                                <Form.Label>Nº Pistas Indoor</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={facilitiesData[idx].indoor}
+                                                    placeholder="Escribe aqui nº pistas indoor disponibles"
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    name="indoor" />
+                                            </Col>
+                                            <Col md={{ span: 6 }}>
+                                                <Form.Label>Nº Pistas Outdoor</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={facilitiesData[idx].outdoor}
+                                                    placeholder="Escribe aqui nº pistas outdoor disponibles"
+                                                    onChange={e => handleFacilityChange(e, idx)}
+                                                    name="outdoor" />
+                                            </Col>
+                                        </Row>
                                     </div>
                                 )
                             })
                         }
+                        
                         <Button variant="dark" onClick={addNewSport}>Añadir Deporte</Button>
                     </Form.Group>
-
-                    <Form.Label className="mt-3" >Imagenes club</Form.Label>
-                    <InputGroup className="mb-3" controlId="imagesField">
-
-                        <Form.Control
-                            placeholder="Introducir url de la imagen"
-                            aria-label="enter image url"
-                            type="url"
-                        />
-                        <Button variant="outline-danger">
-                            Delete
+                    <Form.Label style={{ fontWeight: 'bold' }}>Imagen del Club</Form.Label>
+                    {
+                        clubData.pictures.map((echPicture, idx) => {
+                            return (
+                                <div key={idx}>
+                                    <Form.Group className="mb-3" controlId="imagesField">
+                                        <Form.Label>Imagen Nº{idx + 1}</Form.Label>
+                                        <InputGroup>
+                                            <Form.Control
+                                                type="url"
+                                                value={clubData.pictures[idx]}
+                                                placeholder="Introduce aqui la URL de tu imagen"
+                                                onChange={e => handlePictureChange(e, idx)}
+                                                name="pictures"
+                                            />
+                                            <Button variant="outline-danger" onClick={() => deletePicture(idx)}>
+                                                Eliminar
+                                            </Button>
+                                        </InputGroup>
+                                    </Form.Group>
+                                </div>
+                            )
+                        })
+                    }
+                    <div className="d-grid gap-2 m-5">
+                        <Button variant="dark" onClick={addNewPicture}>
+                            Añadir imagen
                         </Button>
-                    </InputGroup>
-
-                    <Button variant="dark">Añadir imagen</Button>
+                    </div>
+                    <hr />
 
                     <Form.Group className="mb-3" controlId="emailField">
-                        <Form.Label className="mt-3">Contact:</Form.Label>
+                        <Form.Label className="mt-3" style={{ fontWeight: 'bold' }}>Informacion de contacto</Form.Label>
                     </Form.Group>
-
-                    <hr />
 
                     <Row>
                         <Col>
                             <Form.Group controlId="emailField">
-                                <Form.Label>Email</Form.Label>
+                                <Form.Label>Correo electronico</Form.Label>
                                 <Form.Control
                                     type="email"
                                     value={contactData.email}
@@ -311,7 +371,7 @@ const EditClubForm = ({ setShowModal }) => {
 
                         <Col>
                             <Form.Group className="mb-3" controlId="emailField">
-                                <Form.Label>Phone</Form.Label>
+                                <Form.Label>Telefono</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={contactData.phone}
@@ -324,7 +384,7 @@ const EditClubForm = ({ setShowModal }) => {
                     </Row>
 
                     <Form.Group className="mb-3" controlId="imagesField">
-                        <Form.Label>Web</Form.Label>
+                        <Form.Label> Pagina Web</Form.Label>
                         <Form.Control
                             type="url"
                             placeholder="Enter Url"
@@ -333,6 +393,31 @@ const EditClubForm = ({ setShowModal }) => {
                             name="web" />
                     </Form.Group>
 
+                    <Form.Label style={{ fontWeight: 'bold' }}>Ubicacion</Form.Label>
+                    <Row>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="latitudeField">
+                                <Form.Control
+                                    type="text"
+                                    value={locationData.latitude}
+                                    placeholder="Escribe aqui el numero de latitud"
+                                    onChange={handleLocationChange}
+                                    name="latitude"
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="longitudeField">
+                                <Form.Control
+                                    type="text"
+                                    value={locationData.longitude}
+                                    placeholder="Escribe aqui el numero de longitud"
+                                    onChange={handleLocationChange}
+                                    name="longitude"
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
                     <div className="d-grid gap-2 m-5">
                         <Button variant="outline-dark" type='submit'>Guardar Cambios</Button>
