@@ -19,11 +19,11 @@ function ClubMap({ location }) {
             mapContainerStyle={{ height: '500px' }}
             zoom={12}
             onLoad={onLoad}
-            center={{ lat: latitude, lng: longitude }}
+            center={{ lat: Number(latitude), lng: Number(longitude) }}
             onUnmount={onUnmount}
 
         >
-            <Marker position={{ lat: latitude, lng: longitude }} />
+            <Marker position={{ lat: Number(latitude), lng: Number(longitude) }} />
 
         </GoogleMap>
     )
