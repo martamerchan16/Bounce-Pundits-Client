@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from './../Spinners/Spinner'
 import { SERVICES, FACILITIES } from '../../consts/club-const';
 
-const EditClubForm = ({ setShowModal }) => {
+const EditClubForm = ({ setShowModal, fetchClub }) => {
     const API_URL = 'http://localhost:5005'
 
     const { id } = useParams()
@@ -92,6 +92,7 @@ const EditClubForm = ({ setShowModal }) => {
             .then(res => {
                 navigate(`/clubs/${id}`)
                 setShowModal(false)
+                fetchClub()
             })
 
             .catch(err => {
@@ -318,7 +319,7 @@ const EditClubForm = ({ setShowModal }) => {
                                 )
                             })
                         }
-                        
+
                         <Button variant="dark" onClick={addNewSport}>Añadir Deporte</Button>
                     </Form.Group>
                     <Form.Label style={{ fontWeight: 'bold' }}>Imagen del Club</Form.Label>

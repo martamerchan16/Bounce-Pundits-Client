@@ -65,7 +65,7 @@ const ClubDetailsPage = () => {
                 ? <Spinner />
                 : <div className='ClubDetailsPage'>
 
-                    <ClubImgCarousel />
+                    <ClubImgCarousel pictures={club.pictures} />
                     <SmoothScroll data-bs-theme='dark' />
 
                     <section id="info">
@@ -104,7 +104,7 @@ const ClubDetailsPage = () => {
                                 <Modal.Title>Editar club</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <EditClubForm setShowModal={setShowModal} />
+                                <EditClubForm setShowModal={setShowModal} fetchClub={fetchClub} />
                             </Modal.Body>
                         </Modal>
 
