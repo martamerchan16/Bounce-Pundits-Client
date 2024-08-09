@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from './../Spinners/Spinner'
-import { SERVICES, FACILITIES } from '../../consts/club-const';
+import { SERVICES, FACILITIES } from '../../Consts/club-const'
 
 const EditClubForm = ({ setShowModal }) => {
     const API_URL = 'http://localhost:5005'
@@ -318,8 +318,9 @@ const EditClubForm = ({ setShowModal }) => {
                                 )
                             })
                         }
-                        
-                        <Button variant="dark" onClick={addNewSport}>Añadir Deporte</Button>
+                        <div className="d-grid gap-2 m-5">
+                            <Button variant="dark" onClick={addNewSport}>Añadir Deporte</Button>
+                        </div>
                     </Form.Group>
                     <Form.Label style={{ fontWeight: 'bold' }}>Imagen del Club</Form.Label>
                     {
