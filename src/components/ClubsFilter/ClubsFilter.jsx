@@ -9,7 +9,7 @@ const ClubsFilter = () => {
 
     const { id } = useParams()
 
-    const API_URL = 'http://localhost:5005'
+    const API_URL = import.meta.env.VITE_API_URL
 
     const [clubsFiltered, setClubsFiltered] = useState([])
     const [searchInput, setSearchInput] = useState('')

@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { SERVICES, FACILITIES } from "../../Consts/club-const";
 
-const API_URL = "http://localhost:5005";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CreateClubForm = ({ setShowModal, fetchAllClubs }) => {
   const [clubData, setClubData] = useState({

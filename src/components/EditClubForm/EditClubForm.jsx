@@ -9,7 +9,7 @@ import Spinner from './../Spinners/Spinner'
 import { SERVICES, FACILITIES } from '../../Consts/club-const'
 
 const EditClubForm = ({ setShowModal, fetchClub }) => {
-    const API_URL = 'http://localhost:5005'
+    const API_URL = import.meta.env.VITE_API_URL
 
     const { id } = useParams()
     const navigate = useNavigate()

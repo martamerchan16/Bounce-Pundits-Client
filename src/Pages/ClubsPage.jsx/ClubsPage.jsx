@@ -5,7 +5,7 @@ import { Button, Col, Container, Modal, Row } from "react-bootstrap"
 import Spinner from "../../components/Spinners/Spinner"
 import CreateClubForm from "../../components/CreateClubForm/CreateClubForm"
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_API_URL
 
 
 const ClubPage = () => {
