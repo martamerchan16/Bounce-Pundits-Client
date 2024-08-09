@@ -6,7 +6,7 @@ function ClubMap({ location }) {
     const { latitude, longitude } = location
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: ""
+        googleMapsApiKey: "AIzaSyA2zRyxyY65T-x5u7y263X7iW47KzFRyFo"
     })
 
     const [map, setMap] = useState(null)
