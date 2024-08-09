@@ -30,3 +30,7 @@
 .content {
     z-index: 1;
 }
+
+.Homepage h1 {
+    font-size: 700%;
+}

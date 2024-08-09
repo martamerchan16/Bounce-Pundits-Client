@@ -11,7 +11,7 @@ function HomePage() {
                     <source src="https://res.cloudinary.com/dwk8n7yvq/video/upload/v1722623090/istockphoto-1281621806-640_adpp_is_snxtu7.mp4" type="video/mp4" />
                 </video>
                 <div className="content">
-                    <h1>Sport 1</h1>
+                    <h1>Tenis</h1>
                 </div>
             </section>
             <section className="video-section" id="video2">
@@ -19,7 +19,7 @@ function HomePage() {
                     <source src="https://res.cloudinary.com/dwk8n7yvq/video/upload/v1722695067/istockphoto-922512870-640_adpp_is_yjq7z1.mp4" type="video/mp4" />
                 </video>
                 <div className="content">
-                    <h1>Sport 2</h1>
+                    <h1>Pingpong</h1>
                 </div>
             </section>
             <section className="video-section" id="video3">
@@ -27,7 +27,7 @@ function HomePage() {
                     <source src="https://res.cloudinary.com/dwk8n7yvq/video/upload/v1722696530/istockphoto-2035324770-640_adpp_is_chf6aa.mp4" type="video/mp4" />
                 </video>
                 <div className="content">
-                    <h1>Sport 3</h1>
+                    <h1>Padel</h1>
                 </div>
             </section>
             <section className="video-section" id="video4">
@@ -35,7 +35,7 @@ function HomePage() {
                     <source src="https://res.cloudinary.com/dwk8n7yvq/video/upload/v1722696768/istockphoto-1204902161-640_adpp_is_hz2tv2.mp4" type="video/mp4" />
                 </video>
                 <div className="content">
-                    <h1>Sport 4</h1>
+                    <h1>Squash</h1>
                 </div>
             </section>
             <section className="video-section" id="video5">
@@ -43,7 +43,7 @@ function HomePage() {
                     <source src="https://res.cloudinary.com/dwk8n7yvq/video/upload/v1722697610/istockphoto-1361704751-640_adpp_is_drwdrh.mp4" type="video/mp4" />
                 </video>
                 <div className="content">
-                    <h1>Sport 5</h1>
+                    <h1>Fronton</h1>
                 </div>
             </section>
         </div>

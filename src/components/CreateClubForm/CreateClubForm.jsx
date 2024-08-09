@@ -10,11 +10,11 @@ import {
   Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { SERVICES, FACILITIES } from "../../consts/club-const";
+import { SERVICES, FACILITIES } from "../../Consts/club-const";
 
 const API_URL = "http://localhost:5005";
 
-const CreateClubForm = ({ setShowModal }) => {
+const CreateClubForm = ({ setShowModal, fetchAllClubs }) => {
   const [clubData, setClubData] = useState({
     name: "",
     city: "",
@@ -98,6 +98,7 @@ const CreateClubForm = ({ setShowModal }) => {
       .then((res) => {
         navigate("/clubs")
         setShowModal(false)
+        fetchAllClubs()
       })
       .catch((err) => console.log(err));
   };
@@ -293,10 +294,12 @@ const CreateClubForm = ({ setShowModal }) => {
                   </div>
                 );
               })}
+          </FormGroup>
+          <div className="d-grid gap-2 m-5">
             <Button variant="dark" onClick={addNewSport}>
               Añadir Deporte
             </Button>
-          </FormGroup>
+          </div>
         </Form.Group>
         <Form.Label style={{ fontWeight: 'bold' }}>Imagen del Club</Form.Label>
         {

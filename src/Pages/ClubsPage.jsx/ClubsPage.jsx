@@ -35,7 +35,7 @@ const ClubPage = () => {
 
     return (
         < div className="ClubsPage" >
-            <Col className="text-center pt-5 mt-5 col pt" style={{ fontWeight: 'bold' }}>
+            <Col className="text-center pt-1 mt-5 col pt" style={{ fontWeight: 'bold' }}>
                 <h1>Bounce Pundits Clubs</h1>
             </Col>
             <Row>
@@ -58,7 +58,7 @@ const ClubPage = () => {
                     <Modal.Title className="text-center" style={{ fontWeight: 'bold' }}>Nuevo Club</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CreateClubForm setShowModal={setShowModal} />
+                    <CreateClubForm setShowModal={setShowModal} fetchAllClubs={fetchAllClubs} />
                 </Modal.Body>
             </Modal>
 
