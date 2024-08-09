@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from './../Spinners/Spinner'
-import { SERVICES, FACILITIES } from '../../Consts/club-const'
+import { SERVICES, FACILITIES } from '../../consts/club-const'
 
 const EditClubForm = ({ setShowModal, fetchClub }) => {
-    const API_URL = import.meta.env.VITE_API_URL
+
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const { id } = useParams()
     const navigate = useNavigate()

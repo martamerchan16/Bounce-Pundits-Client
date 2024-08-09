@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+
 import {
   Button,
   CloseButton,
@@ -10,9 +11,11 @@ import {
   Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { SERVICES, FACILITIES } from "../../Consts/club-const";
+import { SERVICES, FACILITIES } from "../../consts/club-const";
 
-const API_URL = import.meta.env.VITE_API_URL;
+
+
+const API_URL = import.meta.env.VITE_API_URL
 
 const CreateClubForm = ({ setShowModal, fetchAllClubs }) => {
   const [clubData, setClubData] = useState({
