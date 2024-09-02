@@ -1,38 +1,29 @@
-import "./AboutUsPage.css";
+import "./AboutUsPage.css"
 
 const AboutUsPage = () => {
     return (
         <div className="aboutus">
             <h1>Sobre Nosotros</h1>
             <section className="intro">
-                <p>Bienvenido a [Nombre del Club], el destino principal para los entusiastas de los deportes de raqueta de todos los niveles. Ubicados en el corazón de [Ciudad/Área], estamos dedicados a fomentar una comunidad vibrante donde los miembros puedan disfrutar de la emoción del juego, mejorar sus habilidades y hacer amistades duraderas.</p>
+                <p>Bienvenido a Bounce Pundits, una plataforma creada por apasionados desarrolladores que combina tecnología y deporte para ofrecer la mejor experiencia a los entusiastas de los deportes de raqueta. Nuestra web está diseñada para que puedas encontrar, evaluar y descubrir los mejores clubes de deportes de raqueta en tu área.</p>
             </section>
             <section className="mission">
                 <h2>Nuestra Misión</h2>
-                <p>Nuestra misión es promover el amor por los deportes de raqueta proporcionando instalaciones de primera clase, entrenamiento profesional y un ambiente amigable donde todos, desde principiantes hasta jugadores experimentados, puedan prosperar.</p>
-            </section>
-            <section className="facilities">
-                <h2>Nuestras Instalaciones</h2>
-                <ul>
-                    <li>Canchas de tenis de última generación</li>
-                    <li>Canchas de bádminton de calidad profesional</li>
-                    <li>Salas de tenis de mesa</li>
-                    <li>Salón y cafetería relajantes</li>
-                </ul>
+                <p>Como desarrolladores, nuestra misión es proporcionar una herramienta intuitiva y útil que conecte a los amantes de los deportes de raqueta con los mejores clubes y servicios. Queremos facilitar la búsqueda de clubes y fomentar una comunidad activa donde los usuarios puedan compartir sus experiencias y recomendaciones.</p>
             </section>
             <section className="team">
-                <h2>Conoce a Nuestro Equipo</h2>
-                <p>Nuestro equipo de entrenadores certificados y personal amable están apasionados por los deportes de raqueta y comprometidos a proporcionar la mejor experiencia para nuestros miembros. Ya sea que desees mejorar tu juego o simplemente divertirte, nuestro equipo está aquí para ayudarte a alcanzar tus objetivos.</p>
+                <h2>Conoce al Equipo de Desarrolladores</h2>
+                <p>Somos un equipo de desarrolladores dedicados, comprometidos con crear soluciones digitales que mejoren la manera en que interactuamos con nuestras pasiones. Desde la conceptualización hasta la implementación, trabajamos para ofrecer una plataforma robusta, fácil de usar y llena de funcionalidades que realmente hacen la diferencia.</p>
             </section>
             <section className="gallery">
-                <h2>Desarrolladores web</h2>
+                <h2>Desarrolladores de la Web</h2>
                 <div className="images">
                     <figure>
                         <img src="https://res.cloudinary.com/dwk8n7yvq/image/upload/v1723125207/alex_pseund.jpg" alt="Alex" />
                         <figcaption>Alex Garcia</figcaption>
                     </figure>
                     <figure>
-                        <img src="https://res.cloudinary.com/dwk8n7yvq/image/upload/v1723125207/marta_sa83yx.jpg" alt="Marta" />
+                        <img src="https://res.cloudinary.com/dshhkzxwr/image/upload/v1725302105/IMG_8891copia_mc7gxw.jpg" alt="Marta" />
                         <figcaption>Marta Merchan</figcaption>
                     </figure>
                     <figure>
@@ -45,4 +36,4 @@ const AboutUsPage = () => {
     );
 };
 
-export default AboutUsPage;
+export default AboutUsPage
