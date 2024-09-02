@@ -16,7 +16,6 @@ const AboutUsPage = () => {
                 <p>Somos un equipo de desarrolladores dedicados, comprometidos con crear soluciones digitales que mejoren la manera en que interactuamos con nuestras pasiones. Desde la conceptualización hasta la implementación, trabajamos para ofrecer una plataforma robusta, fácil de usar y llena de funcionalidades que realmente hacen la diferencia.</p>
             </section>
             <section className="gallery">
-                <h2>Desarrolladores de la Web</h2>
                 <div className="images">
                     <figure>
                         <img src="https://res.cloudinary.com/dwk8n7yvq/image/upload/v1723125207/alex_pseund.jpg" alt="Alex" />
