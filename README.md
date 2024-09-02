@@ -1,65 +1,50 @@
+# Bounce Pundits
 
-Bounce Pundits
+**Bounce Pundits** is a website where you can find racket sports clubs, and you'll be able to add comments and evaluate each of the clubs.
 
-It's a webside where you can find rackets sports clubs and you well be able to add comments and evalueate each one of the clubs.
+## Features
 
-Things you can do:
+### Clubs:
+- Create a new club
+- Edit a club
+- Delete a club
+- View clubs
 
-_Clubs_:
-Creat a new club
-Edit a club
-Delete club
-vew clubs
+### Reviews:
+- Create a new review
+- Edit a review
+- Delete a review
+- View reviews
 
-_Review_:
-Creat a new Rev
-Edit a Rev
-Delete Rev
-vew Rev
+## Components
 
+- **Navigation**: Navigation bar.
+- **Footer**: Footer section.
+- **ClubCard**: Club presentation card.
+- **ReviewCard**: Review presentation card.
+- **FormClub**: Form for creating and editing clubs.
+- **EditClubForm**: Form for editing clubs.
+- **CreateClubForm**: Form for creating new clubs.
+- **FormReview**: Form for creating and editing reviews.
+- **EditReviewForm**: Form for editing reviews.
+- **CreateReviewForm**: Form for creating new reviews.
+- **Spinner**: Loading indicator.
+- **SmoothScroll**: Smooth scrolling on the page.
+- **ClubImgCarousel**: Club image carousel.
 
-_Components_:
-Navigation.
-Footer.
-ClubCard.
-ReviewCard.
-FormClub.
-EditClubForm.
-CreateClubForm.
-FormReview.
-EditReviewForm.
-CreateReviewForm.
+## Pages
 
+- **AboutUsPage**: About Us page.
+- **HomePage**: Home page.
+- **ClubsPage**: Clubs page.
+- **ClubDetailsPage**: Club details page.
+- **CreateClubPage**: Page for creating a new club.
+- **NotFoundPage**: 404 error page.
 
-_Pages_:
-AboutUsPage.
-HomePage. 
-ClubsPage.
-ClubDetailsPage.
-EditClubPage.
-EditReviewPage.
-CreateClubPage
-CreateReviewPage.
-NotFoundPage.
+## Paths
 
-_Path_: 
-
-HomePage = '/'
-ClubsPage = '/clubs'
-ClubDetailsPage = '/clubs/:id'
-EditClubPage = '/clubs/edit/:id'
-EditReviewPage = '/clubs/:id/review/edit/:id'
-CreateClubPage = '/clubs/create'
-CreateReviewPage = '/clubs/:id/review/create'
-AboutUsPage = '/about'
-NotFoundPage = '*'
-
-
-
-
-
-
-
-
-
-
+- **HomePage**: `/`
+- **ClubsPage**: `/clubs`
+- **ClubDetailsPage**: `/clubs/:id`
+- **AboutUsPage**: `/about`
+- **NotFoundPage**: `*`

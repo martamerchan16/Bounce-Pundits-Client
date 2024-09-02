@@ -58,14 +58,14 @@ const CreateClubForm = ({ setShowModal, fetchAllClubs }) => {
     setClubData((prevState) => {
       const services = checked
         ? [...prevState.services, { name: name }]
-        : prevState.services.filter((service) => service.name != name);
-      return { ...prevState, services };
-    });
-  };
+        : prevState.services.filter((service) => service.name != name)
+      return { ...prevState, services }
+    })
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setClubData({ ...clubData, [name]: value });
+    setClubData({ ...clubData, [name]: value })
   };
 
   const handleLocationChange = (e) => {
