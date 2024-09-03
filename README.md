@@ -1,50 +1,37 @@
 # Bounce Pundits
 
-**Bounce Pundits** is a website where you can find racket sports clubs, and you'll be able to add comments and evaluate each of the clubs.
+## Description
 
-## Features
+Bounce Pundits es una plataforma donde puedes encontrar clubes de deportes de raqueta, agregar comentarios y evaluar cada uno de ellos.
 
-### Clubs:
-- Create a new club
-- Edit a club
-- Delete a club
-- View clubs
+<img src="./src/assets/detailsPage.png" alt="Details Page Screenshot" width="70%"/>
 
-### Reviews:
-- Create a new review
-- Edit a review
-- Delete a review
-- View reviews
+## How it works
 
-## Components
+<p>Diseñamos una plataforma intuitiva destinada a proporcionar a los usuarios una forma sencilla de encontrar y evaluar clubes de deportes de raqueta.</p>
+<p>Además, desarrollamos un servidor utilizando JSON para gestionar los datos de manera eficiente y proporcionar una experiencia de usuario fluida.</p>
 
-- **Navigation**: Navigation bar.
-- **Footer**: Footer section.
-- **ClubCard**: Club presentation card.
-- **ReviewCard**: Review presentation card.
-- **FormClub**: Form for creating and editing clubs.
-- **EditClubForm**: Form for editing clubs.
-- **CreateClubForm**: Form for creating new clubs.
-- **FormReview**: Form for creating and editing reviews.
-- **EditReviewForm**: Form for editing reviews.
-- **CreateReviewForm**: Form for creating new reviews.
-- **Spinner**: Loading indicator.
-- **SmoothScroll**: Smooth scrolling on the page.
-- **ClubImgCarousel**: Club image carousel.
+<p>Puedes encontrar el código del backend [aquí](https://github.com/martamerchan16/json-server-backend).</p>
 
-## Pages
+### Funcionalidades Principales:
 
-- **AboutUsPage**: About Us page.
-- **HomePage**: Home page.
-- **ClubsPage**: Clubs page.
-- **ClubDetailsPage**: Club details page.
-- **CreateClubPage**: Page for creating a new club.
-- **NotFoundPage**: 404 error page.
+1. **Descubrimiento de Clubs:** 
+   - Accede a información detallada sobre los clubs, incluyendo su localización a través de Google Maps, servicios ofrecidos y deportes disponibles.
 
-## Paths
+2. **Reseñas de Usuarios:** 
+   - Consulta reseñas de otros usuarios para evaluar la calidad de los clubs.
 
-- **HomePage**: `/`
-- **ClubsPage**: `/clubs`
-- **ClubDetailsPage**: `/clubs/:id`
-- **AboutUsPage**: `/about`
-- **NotFoundPage**: `*`
+3. **Búsqueda en Tiempo Real:** 
+   - Filtra clubes por nombre y ubicación al instante.
+
+4. **Interacción del Usuario:**
+   - **Gestión de Contenidos:** Los usuarios pueden añadir, editar y eliminar clubs y reseñas mediante formularios intuitivos.
+   - **Puntuación de Clubs:** Los usuarios pueden calificar los clubs, puntuándolos según su experiencia.
+   
+Bounce Pundits combina la pasión por el deporte con una experiencia de usuario fluida y funcional, permitiendo a los amantes de la raqueta descubrir, compartir y disfrutar de nuevos clubs de manera interactiva.
+
+<img src="./src/assets/form.png" alt="Form Screenshot" width="70%"/>
+
+## Demo
+
+Try [Bounce Pundits](https://bounce-pundits.netlify.app/) yourself!
