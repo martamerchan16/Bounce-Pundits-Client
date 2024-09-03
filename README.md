@@ -11,7 +11,7 @@ Bounce Pundits es una plataforma donde puedes encontrar clubes de deportes de ra
 <p>Diseñamos una plataforma intuitiva destinada a proporcionar a los usuarios una forma sencilla de encontrar y evaluar clubes de deportes de raqueta.</p>
 <p>Además, desarrollamos un servidor utilizando JSON para gestionar los datos de manera eficiente y proporcionar una experiencia de usuario fluida.</p>
 
-<p>Puedes encontrar el código del backend [aquí](https://github.com/martamerchan16/json-server-backend).</p>
+Puedes encontrar el código del backend [aquí](https://github.com/martamerchan16/json-server-backend).
 
 ### Funcionalidades Principales:
 
@@ -27,7 +27,7 @@ Bounce Pundits es una plataforma donde puedes encontrar clubes de deportes de ra
 4. **Interacción del Usuario:**
    - **Gestión de Contenidos:** Los usuarios pueden añadir, editar y eliminar clubs y reseñas mediante formularios intuitivos.
    - **Puntuación de Clubs:** Los usuarios pueden calificar los clubs, puntuándolos según su experiencia.
-   
+
 Bounce Pundits combina la pasión por el deporte con una experiencia de usuario fluida y funcional, permitiendo a los amantes de la raqueta descubrir, compartir y disfrutar de nuevos clubs de manera interactiva.
 
 <img src="./src/assets/form.png" alt="Form Screenshot" width="70%"/>
